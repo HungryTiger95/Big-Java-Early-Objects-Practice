@@ -19,7 +19,7 @@ import java.util.Scanner;
  * Write a program that reads in values for B, L, T, x, and n and then
  * prints out the cross-sectional area at x.
  * 
- * Does Not Work: Gave up on the derivation of the answer
+ * Does Not Work: Gave up on the derivation of the answer. Did Not know how to do the problem.
  *
  * @author Mayuresh
  *
