@@ -30,5 +30,11 @@ public class TranslateDemo
 		// Move the rectangle and set the frame bounds again
 		box.setLocation(500, 100);
 		frame.setBounds(box);
+		
+		JOptionPane.showMessageDialog(frame, "Click OK to continue");
+		
+		// Move the rectangle and set the frame bounds again
+		box.setLocation(700, 200);
+		frame.setBounds(box);
 	}
 }
