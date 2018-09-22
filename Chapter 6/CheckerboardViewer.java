@@ -6,7 +6,8 @@ public class CheckerboardViewer
 	{
 		JFrame frame = new JFrame();
 		
-		frame.setSize(400, 400);
+		frame.setSize(350, 375);
+		frame.setLocation(650, 250);
 		frame.setTitle("Checkerboard");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	

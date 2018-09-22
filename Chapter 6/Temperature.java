@@ -7,6 +7,7 @@ import java.util.Scanner;
  * month with the highest temperature.
  * 
  * Sample Input: 18.2 22.6 26.4 31.1 36.6 42.2 45.7 44.5 40.2 33.1 24.2 17.6
+ * 
  * @author Mayuresh
  *
  */

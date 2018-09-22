@@ -104,7 +104,11 @@ public class Computing
 		for (int i = 0; i < num.length(); i++)
 		{
 			int stringNum = Integer.parseInt(num.substring(i, i + 1));
-			sum = sum + stringNum;
+			
+			if(stringNum % 2 != 0)
+			{
+				sum = sum + stringNum;
+			}
 		}
 		
 		System.out.println("Sum of All the Digits of " + num + ": " + sum);

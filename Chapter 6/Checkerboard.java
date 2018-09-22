@@ -18,7 +18,7 @@ public class Checkerboard
 	private int rows;
 	private int columns;
 	
-	private int xPos = 10, yPos = 10, length = 20;
+	private int xPos = 10, yPos = 10, length = 30;
 	private Square square = new Square(xPos, yPos, length);
 	
 	// Constructors

@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * Just a simple test to see how the Random class works
+ * 
+ * @author Mayuresh
+ *
+ */
 public class RandTest
 {
 	public static void main(String[] args)

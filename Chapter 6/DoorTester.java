@@ -20,6 +20,7 @@ public class DoorTester
 		System.out.println("Expected: 1, Goat");
 		
 		System.out.printf("door3: %d, %s\n", door3.getDoorVal(), door3.getDoorName());
+		System.out.println("Expected: -1, null");
 		
 		System.out.println("\n------------------\nMethod Testng\n------------------\n");
 		

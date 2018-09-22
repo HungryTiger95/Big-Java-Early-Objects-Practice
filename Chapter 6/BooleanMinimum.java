@@ -28,7 +28,7 @@ public class BooleanMinimum
 		double min = Double.MAX_VALUE;
 		double val;
 		
-		System.out.print("Please Enter A Number: ");
+		System.out.print("Please Enter A Number (Q) to quit: ");
 		do
 		{
 			val = in.nextDouble();
@@ -43,7 +43,7 @@ public class BooleanMinimum
 				min = val;
 			}
 			
-			System.out.print("Please Enter A Number: ");
+			System.out.print("Please Enter A Number (Q) to quit: ");
 		}
 		while (in.hasNextDouble());
 		

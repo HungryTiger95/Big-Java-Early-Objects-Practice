@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * E6.8
  * 
- * Write a program that reads a word and prints each character of the word on a seperate line.
+ * Write a program that reads a word and prints each character of the word on a separate line.
  * For example, if the user provides the input "Harry", the program prints
  * 
  * H
