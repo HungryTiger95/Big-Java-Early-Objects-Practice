@@ -1,10 +1,13 @@
 package project16;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -27,20 +30,38 @@ public class MovingCarFrame extends JFrame
 	
 	class TimerListener implements ActionListener
 	{
-		private int dx = 2;
-		
 		public void actionPerformed(ActionEvent event)
 		{
-			if(scene.getCar1X() <= 0 || scene.getCar2X() <= 0)
+			for(int i = 0; i < scene.getAmountOfCars(); i++)
 			{
-				dx = -dx;
+				if(scene.getCarAt(i).getX() < 0)
+				{
+					scene.getCarAt(i).setDX(scene.getCarAt(i).getDX() * -1);
+					scene.moveCarBy(scene.getCarAt(i).getDX(), 0, i);
+				}
+				else if(scene.getCarAt(i).getX() > FRAME_WIDTH - scene.getCarWidth())
+				{
+					scene.getCarAt(i).setDX(scene.getCarAt(i).getDX() * -1);
+					scene.moveCarBy(scene.getCarAt(i).getDX(), 0, i);
+				}
+				else
+				{
+					scene.moveCarBy(scene.getCarAt(i).getDX(), 0, i);
+				}
 			}
-			else if(scene.getCar1X() >= FRAME_WIDTH - scene.getCarWidth() || scene.getCar2X() >= FRAME_WIDTH - scene.getCarWidth())
+		}
+	}
+	
+	class MousePressListener extends MouseAdapter
+	{
+		public void mousePressed(MouseEvent event)
+		{
+			if(scene.getAmountOfCars() < 5)
 			{
-				dx = -dx;
+				Random gen = new Random();
+				
+				scene.addCar(event.getX(), event.getY(), 2, Color.red);
 			}
-			
-			scene.moveCarBy(dx, 0);
 		}
 	}
 	
@@ -54,9 +75,10 @@ public class MovingCarFrame extends JFrame
 		
 		setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		
+		MouseListener mouseList = new MousePressListener();
+		scene.addMouseListener(mouseList);
+		
 		ActionListener timerList = new TimerListener();
-		
-		
 		final int DELAY = 10;
 		Timer t = new Timer(DELAY, timerList);
 		t.start();
