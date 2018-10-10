@@ -17,7 +17,7 @@ import java.awt.geom.Point2D;
 public class MovingCar
 {
 	// Instance Variables
-	private int xTop, yTop;
+	private int xTop, yTop, dx;
 	private Color color;
 	
 	// Constructors
@@ -28,10 +28,11 @@ public class MovingCar
 	 * @param size size multiplier. Cannot be 0. Default size is 1.
 	 * @param color color of the car.
 	 */
-	public MovingCar(int xPosition, int yPosition, Color color)
+	public MovingCar(int xPosition, int yPosition, int dx, Color color)
 	{
 		this.xTop = xPosition;
 		this.yTop = yPosition;
+		this.dx = dx;
 		this.color = color;	
 	}
 	
@@ -58,11 +59,6 @@ public class MovingCar
 		// The bottom of the rear windshield
 		Point2D.Double r4 = new Point2D.Double((xTop + 50), (yTop + 10));
 		
-		// Make lines from the above points
-		Line2D.Double frontWindshield = new Line2D.Double(r1, r2);
-		Line2D.Double roofTop = new Line2D.Double(r2, r3);
-		Line2D.Double rearWindshield = new Line2D.Double(r3, r4);
-		
 		Polygon RoofWindshield = new Polygon();
 		RoofWindshield.addPoint((int) r1.getX(), (int) r1.getY());
 		RoofWindshield.addPoint((int) r2.getX(), (int) r2.getY());
@@ -75,9 +71,16 @@ public class MovingCar
 		g2.fill(frontTire);
 		g2.fill(backTire);
 		g2.fillPolygon(RoofWindshield);
-		//g2.draw(frontWindshield);
-		//g2.draw(roofTop);
-		//g2.draw(rearWindshield);
+	}
+	
+	public void setDX(int dx)
+	{
+		this.dx = dx;
+	}
+	
+	public int getDX()
+	{
+		return this.dx;
 	}
 	
 	/**
