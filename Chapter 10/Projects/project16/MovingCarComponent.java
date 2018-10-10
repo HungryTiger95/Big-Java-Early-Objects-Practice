@@ -3,12 +3,6 @@ package project16;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -22,12 +16,8 @@ import javax.swing.JComponent;
 public class MovingCarComponent extends JComponent
 {
 	// Instance Variables
-	private static final int CAR_X = 10;
-	private static final int CAR_Y = 10;
-	private static final Color CAR_COLOR = Color.red;
 	
-	private MovingCar car1;
-	private MovingCar car2;
+	private ArrayList<MovingCar> cars;
 	
 	// Constructors
 	/**
@@ -35,8 +25,7 @@ public class MovingCarComponent extends JComponent
 	 */
 	public MovingCarComponent()
 	{
-		car1 = new MovingCar(CAR_X, CAR_Y, CAR_COLOR);
-		car2 = new MovingCar(CAR_X + 40, CAR_Y + 100, CAR_COLOR);
+		cars = new ArrayList<MovingCar>();
 	}
 	
 	// Methods
@@ -48,26 +37,40 @@ public class MovingCarComponent extends JComponent
 	{
 		Graphics2D g2 = (Graphics2D) g;
 		
-		car1.draw(g2);
-		car2.draw(g2);
+		for(MovingCar car : cars)
+		{
+			car.draw(g2);
+		}
 	}
 	
 	/**
-	 * Gets the cars x position
-	 * @return x value of top left corner of car
+	 * Adds a new car at a given location using x and y position and a given color
+	 * @param x x pos
+	 * @param y y pos
+	 * @param color color
 	 */
-	public int getCar1X()
+	public void addCar(int x, int y, int dx, Color color)
 	{
-		return this.car1.getX();
+		MovingCar newCar = new MovingCar(x, y, dx, color);
+		cars.add(newCar);
+		
+		repaint();
 	}
 	
 	/**
-	 * Gets the second cars x position
-	 * @return x value of top left corner of car
+	 * Gets the x position of all the cars in the component
+	 * @return list of all car x values
 	 */
-	public int getCar2X()
+	public ArrayList<Integer> getAllCarX()
 	{
-		return this.car2.getX();
+		ArrayList<Integer> xVals = new ArrayList<Integer>();
+		
+		for(MovingCar car : cars)
+		{
+			xVals.add(car.getX());
+		}
+		
+		return xVals;
 	}
 	
 	/**
@@ -79,29 +82,62 @@ public class MovingCarComponent extends JComponent
 		return 75;
 	}
 	
-	 /**
-	  * Moves the car by a given number of x and y values
-	  * @param x the amount to move the cars x position
-	  * @param y the amount to move the cars y position
-	  */
-	public void moveCarBy(int x, int y)
+	/**
+	 * Moves each car by a given x and y value
+	 * @param x x value to move by
+	 * @param y y value to move by
+	 */
+	public void moveCarsBy(int x, int y)
 	{
-		car1.translate(x, y);
-		car2.translate(x, y);
-		
+		for(MovingCar car : cars)
+		{
+			car.translate(x, y);
+			repaint();
+		}
+	}
+	
+	/**
+	 * Moves a single car in the component by a given x and y value.
+	 * @param x x pos
+	 * @param y y pos
+	 * @param i index of car
+	 */
+	public void moveCarBy(int x, int y, int i)
+	{
+		cars.get(i).translate(x, y);
 		repaint();
 	}
 	
 	/**
-	 * Moves the car to a given location
+	 * Moves each car to a given location
 	 * @param x the x position
 	 * @param y the y position
 	 */
 	public void moveCarTo(int x, int y)
 	{
-		car1.move(x, y);
-		car2.move(x, y);
-		
-		repaint();
+		for(MovingCar car : cars)
+		{
+			car.move(x, y);
+			repaint();
+		}
+	}
+	
+	/**
+	 * Gets the number of cars in the component
+	 * @return the number of cars
+	 */
+	public int getAmountOfCars()
+	{
+		return cars.size();
+	}
+	
+	/**
+	 * Gets a car at the given index of the array of cars
+	 * @param index the index
+	 * @return the car at the given index
+	 */
+	public MovingCar getCarAt(int index)
+	{
+		return cars.get(index);
 	}
 }
