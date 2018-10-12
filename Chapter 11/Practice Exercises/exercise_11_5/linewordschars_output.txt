@@ -1,0 +1,3 @@
+Number of Lines:              14
+Number of Words:             107
+Number of Characters:        492
