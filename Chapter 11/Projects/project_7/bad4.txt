@@ -1,0 +1,14 @@
+Mayuresh Patel:Food:23.56:09/14/2018:
+Karan Patel:Lodging:150.54:09/14/2018:
+Karina Patel:Conference:1500:45:
+Diya Patel:Parking:15:09/14/2018:
+Shiv Patel:Taxes:52.30:09/14/2018:
+Avi Patel:Food:25:09/14/2018:
+Adi Patel:Taxes:46.90:09/14/2018:
+Prachi Patel:Parking:15:09/14/2018:
+Dev Patel:Food:32.10:09/14/2018:
+Payal Patel:Parking:15:09/14/2018:
+Priya Patel:Parking:15:09/14/2018:
+Raj Patel:Food:17.89:09/14/2018:
+Sid Patel:Lodging:136.27:09/14/2018:
+Harshid Patel:Taxes:62.89:09/14/2018

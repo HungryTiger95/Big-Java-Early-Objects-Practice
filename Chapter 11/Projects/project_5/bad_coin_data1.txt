@@ -1,0 +1,8 @@
+Quarter .25
+Penny .01
+Dime .10
+.05 Nickel
+Quarter .25
+Rubik .75
+Polon 1.25
+Hungle 1.50
