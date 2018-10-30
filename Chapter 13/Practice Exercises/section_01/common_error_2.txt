@@ -1,0 +1,18 @@
+Tracing Through Recursive Methods
+
+When you set a breakpoint in a recursive method, the program stops as soon
+as that program line is encountered in any call to the recursive method. Suppose
+you want to debug the recursive getArea method of the Triangle class. Debug
+the TriangleTester program and run until the beginning of the getArea method.
+Inspect the width instance variable. It is 10.
+
+Remove the breakpoint and now run until the statement return smallerArea + width;.
+When you inspect width again, its value is 2! That makes no sense. There was no
+instruction that changed the value of width. Is that a bug with the debugger?
+
+No. The program stopped in the first recursive call to getArea that reached the
+return statement. If you are confused, look at the call stack. You will see that
+nine calls to getArea are pending.
+
+You can debug recursive methods with the debugger. You just need to be particularly
+careful, and watch the call stack to understand which nested call you currently are in.

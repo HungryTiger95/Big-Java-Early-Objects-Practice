@@ -1,0 +1,11 @@
+Infinite Recursion
+
+A common programming error is an infinite recursion: a method calling itself over an over
+with no end in sight. The computer needs some amount of memory for bookkeeping for each
+call. After some number of calls, all memory that is available for this purpose is exhausted.
+Your program shuts down and reports a "stack overflow".
+
+Infinite recursion happens either because the arguments don't get simpler or because a
+special terminating case is missing. For example, suppose the getArea method was allowed to
+compute the area of a triangle with width 0. If it weren't for the special test, the method would
+construct triangles with width -1, -2, -3, and so on.
