@@ -1,0 +1,27 @@
+The call a.compareTo(b) is allowed to return any negative integer
+to denote that a should come before b, not necessarily the value -1.
+That is, the test
+
+		if(a.compareTo(b) == -1) // ERROR!
+		
+is generally wrong. Instead, you should test
+
+		if(a.compareTo(b) < 0) // OK
+		
+Sometimes it is convenient to just return the difference of two
+integers. For example, the compareTo method of the String class
+compares characters matching positions:
+
+		char c1 = charAt(i);
+		char c2 = other.charAt(i);
+		
+If the characters are different, then the method simply returns
+their difference:
+
+		if(c1 != 2)
+		{
+			return c1 - c2;
+		}
+		
+This difference is a negative number if c1 is less than c2, but it
+is not necessarily the number -1.

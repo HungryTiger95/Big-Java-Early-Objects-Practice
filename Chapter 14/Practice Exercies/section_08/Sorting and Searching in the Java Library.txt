@@ -1,0 +1,74 @@
+Sorting:
+
+The Arrays class contains static sort methods to sort arrays of integers
+and floating-point numbers. The sort method uses the quicksort algorithm.
+If your data are contained in an ArrayList, use the Collections.sort method
+instead; it uses the merge sort algorithm.
+
+Binary Search:
+
+The Arrays and Collections classes contain static binarySearch methods that
+implement the binary search algorithm, but with a useful enhancement. If a
+value is not found in the array, then the returned value is not -1, but -k - 1,
+where k is the position before which the element should be inserted.
+For example:
+
+		int[] a = {1, 4, 9};
+		int v = 7;
+		int pos = Arrays.binarySearch(a, v);
+		
+		// Returns  -3; v should be inserted before position 2
+
+Comparing Objects:
+
+In application programs, you often need to sort or search through collections
+of objects. Therefore, the Arrays and Collections classes also supply sort and
+binarySearch methods for objects. However, these methods cannot know how to
+compare arbitrary objects. They require that the objects belong to classes that
+implement the Comparable interface type that was introduced in Section 10.3. That
+interface has a single method:
+
+		public interface Comparable
+		{
+			int compareTo(Object otherObject);
+		}
+		
+The call a.compareTo(b) must return a negative number if a should come before b,
+0 if a and b are the same, and a positive number otherwise.
+
+You can implement the COmparable interface for your own classes as well. For
+example, to sort a collection of countries, the Country class would need to 
+implement this interface and provide a compareTo method:
+
+		public class Country implements Comparable
+		{
+			public int compareTo(Object otherObject)
+			{
+				Country other = (Country) otherObject;
+				
+				if(area < other.area)
+				{
+					return -1;
+				}
+				else if(area == other.area()
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
+			}
+		}
+
+This method compares countries by their area. Now you can pass an array of
+countries to the Arrays.sort method:
+
+		Country[] countries = new Country[n];
+		
+		// sort countries
+		Arrays.sort(countries);
+		
+Whenever you need to carry out sorting or searching, use the methods in the
+Arrays and Collections classes and not those that you write yourself. The
+library algorithms have been fully debugged and optimized.

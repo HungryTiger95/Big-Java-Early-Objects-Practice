@@ -1,0 +1,54 @@
+Now let's turn to a more interesting case. What if we do a lot of work with each visit?
+Here is an example: We want to find the most frequent element in an array.
+
+Suppose the array is:
+
+		8 7 5 7 7 5 4
+
+We can count how often the value 8 occurs, then move on to count how often 7 occurs,
+and so on. Where do we put the counts? Let's put them into a second array of the same
+length.
+
+		a: 8 7 5 7 7 5 4
+   counts: 1 3 2 3 3 2 1
+   
+Then we take the maximum of the counts. It is 3. We look up where the 3 occurs in the
+counts, and find the corresponding value. Thus, the most common value is 7. Let us
+first estimate how long it takes to compute the counts.
+
+		for(int i = 0; i < a.length; i++)
+		{
+			counts[i] = Count how often a[i] occurs in a
+		}
+
+We still visit each array element once, but now the work per visit is much larger. As
+you have seen in the previous section, each counting action is O(n). When we do O(n)
+work in each step, the total running time i O(n^2).
+
+This algorithm has three phases:
+
+	1) Compute all counts
+	2) Compute the maximum
+	3) Find the maximum in the counts
+	
+We have just seen that the first phase is O(n^2). COmputing the maximum is O(n).
+Finally, we just saw that finding a value is O(n).
+
+How can we estimate the total running time form the estimates of each phase? Of
+course, the total time is the sum of the individual times, but for big-Oh estimates,
+we take the maximum of the estimates. To see why, imagine that we had actual
+equations for each of the times:
+
+		T1(n) = an^2 + bn + c
+		T2(n) = dn + e
+		T3(n) = fn + g
+
+Then the sum is
+
+		T(n) = T1(n) + T2(n) + T2(n) = an^2 + (b + d + f)n + c + e + g
+		
+But only the largest term matters, so T(n) is O(n^2).
+
+Thus, we have found that our algorithm for finding the most frequent element is O(n^2).
+
+
