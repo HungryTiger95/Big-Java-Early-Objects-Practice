@@ -1,0 +1,34 @@
+An Overview of the Collections Framework
+
+When you need to organize multiple objects in your program, you can place them into
+a collection. The Java Collections framework is a hierarchy of interface type and classes
+for collecting objects.
+
+At the root of the hierarchy is the Collection interface. That interface has methods
+for adding and removing elements, and so on. Because all collections implement this
+interface, its methods are available for all collection classes.
+
+In Java, a list is a collection that remembers the order of its elements. The ArrayList
+class implements the List interface. An ArrayList is simply a class containing an array that
+is expanded as needed. Several common operations are inefficient with array lists. In particular,
+if an element is added or removed, the elements at larger positions must be moved.
+
+The Java library supplies another class, LinkedList, that also implements the List interface.
+Unlike an array list, a linked list allows efficient insertion and removal of elements in the middle
+of the list.
+
+Use a list whenever you want to retain the order that you established.
+
+A Set is a collection without an intrinsic order.
+Because a set does not track the order of the elements, it can arrange the elements so that the
+operations of finding, adding, and removing elements become more efficient.
+
+Another way of gaining efficiency is to reduce the number of operations. A Stack remembers the
+order of its elements, but it does not allow you to insert elements in every position.
+
+In a Queue, you add items to one end (the tail) and remove them from the other end (the head).
+A Priority Queue is an unordered collection that has an efficient operation for removing the element
+with the highest priority.
+
+A Map manages associations between keys and values. Every key in the map has an associated value.
+The map stores the keys, values, and the associations between them.

@@ -1,0 +1,81 @@
+Sets:
+
+A set organizes its value in an order that is optimized for efficiency, which may not be the
+order in which you add elements. Inserting and removing elements is more efficient with a set
+than with a list.
+
+-----------------------------------------------------------------------------------------------------
+Choosing a Set Implementation:
+
+The Set interface in the standard Java library has the same methods as the Collection interface.
+However, there is an essential difference between arbitrary collections and sets. A set does not
+admit duplicates. If you add an element to a set that is already present, the insertion is ignored.
+
+The HashSet and TreeSet classes implement the Set interface. These two classes provide set
+implementations based on two different mechanisms, called hash tables and binary search trees.
+
+The basic idea of a hash table is simple. Set elements are grouped into smaller collections of
+elements that share the same characteristic. You can imagine a has set of books as having a
+group for each color, so that books of the same color are in the same group. Hash tables actually
+use integer values (called hash codes) that can be computed from the elements.
+
+In order to use a hash table, the elements must have a method to compute those integer
+values. This method is called hashCode. The elements must also belong to a class with a
+properly defined equals method.
+
+Suppose you want to form a set of elements belonging to a class that you declared, such
+as a HashSet<Book>. Then you need to provide hashCode and equals methods for the class Book.
+There is one exception to this rule. If all elements are distinct, then you can simply inherit
+the hashCode and equals methods of the Object class.
+
+The TreeSet class uses a different strategy for arranging its elements. Elements are kept
+in sorted order. The elements are not stored in an array. Instead, they are stored in nodes,
+as in a linked list. However, the nodes are not arranged in a linear sequence but in a tree shape.
+
+In order to use a TreeSet, it must be possible to compare the elements and determine which
+one is "larger". You can use a TreeSet for classes such as String and Integer that implement
+the Comparable interface.
+
+As a rule of thumb, you should choose a TreeSet if you want to visit the set's elements in
+sorted order. Otherwise choose a HashSet - as long as the hash function is well chosen, it
+is a bit more efficient.
+
+When you construct a HashSet or TreeSet,  store the reference in a Set<String> variable
+either as:
+
+		Set<String> name = new HashSet<String>();
+	
+	or
+	
+		Set<String> name = new treeSet<String>();
+		
+After you construct the collection object, the implementation no longer matters; only
+the interface is important.
+-----------------------------------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------
+Working with Sets:
+
+As in mathematics, a set collection in Java rejects duplicates. Adding an element has no effect
+if the element is already in the set. The contains method tests whether an element is contained
+in the set:
+
+		if(names.contains("Juliet"));
+		
+The contains method uses the equals method of the element type. If you implemented the element
+type, then you need to define the equals method. To list all elements in a set, use an iterator.
+
+A set iterator visits the elements in the order in which the set implementation keeps them. This
+is not necessarily the order in which you inserted them. The order of elements in a hash set
+seems quite random because the hash code spreads the elements into different groups. When you
+visit elements of a tree set, they always appear in sorted order, even if you inserted them in
+a different order.
+
+The ListIterator has an add method to add an element at the list iterator position. The
+Iterator interface has no such method. It makes no sense to add an element at a particular
+position in a set, because the set can order the elements any way it likes. Thus, you always
+add elements directly to a set, never to an iterator of the set. However, you remove a set
+element at an iterator position, just as you do with list iterators.
+
+Because the elements are not ordered, it is not meaningful to distinguish between
+"going forward" and "going backward".

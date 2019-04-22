@@ -1,0 +1,100 @@
+Linked Lists:
+
+A linked list is a data structure used for collecting a sequence of objects that allows efficient
+addition and removal of elements in the middle of the sequence
+
+------------------------------------------------------------------------------------------------------
+The Structure of Linked Lists:
+
+A linked list uses a sequence of nodes. A node is an object that stores an element and references
+to the neighboring nodes in the sequence. When you insert a new node into a linked list, only the
+neighboring node references need to be updated. The same is true when you remove a node. Linked
+Lists allow efficient insertion and removal, but element access can be inefficient.
+
+The term "random access" is used in computer science to describe an access pattern in
+which element are accessed in arbitrary order (not necessarily random). In contrast,
+sequential access visits the elements in sequence.
+
+Use linked lists when you are concerned about the efficiency of inserting or removing
+elements and you rarely need element access in random order.
+------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------
+The LinkedList Class of the Java Collections Framework:
+
+The Java library provides a LinkedList class in the java.util package. It is a generic
+class. That is, you specify the type of the list elements in angle brackets. There are methods
+for accessing the beginning and the need of the list directly. However, to visit the other elements,
+you need a list iterator.
+------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------
+List Iterators:
+
+An iterator encapsulates a position anywhere inside the linked list. Conceptually, you should think
+of the iterator as pointing between two elements, just as the cursor in a word processor points between
+two characters.
+
+You obtain a list iterator with the listIterator method of the LinkedList class:
+
+		LinkedList<String> employeeNames = ...;
+		ListIterator<String> iterator = employeeNames.listIterator();
+	
+Note that the iterator class is also a generic type. A ListIterator<String> iterates through a list of
+strings; a ListIterator<Book> visits the elements in a LinkedList<Book>.
+
+Initially, the iterator points before the first element. You can move the iterator position with the
+next method:
+
+		iterator.next();
+		
+The next method throws a NoSuchElementException if you are already past the end of the list. You should
+always call the iterator's hasNext method before calling next
+
+		if(iterator.hasNext())
+		{
+			iterator.next();
+		}
+		
+The next method returns the element that the iterator is passing. In general, the return type of the next
+method matches the list iterator's type parameter.
+
+You traverse all elements in a linked list with the following loop:
+
+		while(iterator.hasNext())
+		{
+			String name = iterator.next();
+			Do something with name
+		}
+		
+As a shorthand, if your loop simple visits all elements, you can use the "for each" loop:
+
+		for(String s : employeeNames)
+		{
+			Do something with name
+		}
+		
+The nodes of the LinkedList class store two links one to the next element and one to the
+previous one. Such a list is called a doubly-linked list. You can use the previous and
+hasPrevious methods of the ListIterator interface to move the iterator position backward.
+
+The add method adds an object after the iterator, then moves the iterator position past
+the new element:
+
+		iterator.add("Juliet");
+		
+The remove method removes the object that was returned by the last call to next or previous:
+
+		while(iterator.hasNext())
+		{
+			String name = iterator.next();
+			if(condition is fulfilled for name)
+			{
+				iterator.remove();
+			}
+		}
+		
+You have to be careful when calling remove. It can be called only once after calling next
+or previous, and you cannot call it immediately after a call to add. If you call the
+method improperly, it throws an IllegalStateException.
+------------------------------------------------------------------------------------------------------

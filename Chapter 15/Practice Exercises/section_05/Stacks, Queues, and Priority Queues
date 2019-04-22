@@ -1,0 +1,74 @@
+These data structures each have a different policy for data removal. Removing an element yields the
+most recently added element, the least recently added, or the element with the highest priority.
+
+------------------------------------------------------------------------------------------------------------
+Stacks:
+
+A stack lets you insert and remove elements only at one end, traditionally called the top of the
+stack. New items can be added to the top of teh stack. Items are removed from the top of the stack
+as well. This is known as "last-in, first-out" or "LIFO" order. With stacks, the addition and removal
+operations are called push and pop.
+
+		Stack<String> s = new Stack<String>();
+		s.push("A");
+		s.push("B");
+		s.push("C");
+		
+		while(s.size > 0)
+		{
+			System.out.print(s.pop() + " "); // prints C B A
+		}
+		
+There are many applications for stacks in computer science. Consider the undo feature of a word
+processor. It keeps the issued commands in a stack. When you select the "Undo" button, the last
+command is undone, then the next-to-last, and so on.
+
+ANother important example is the run-time stack that a processor or virtual machine keeps to
+store the values of variables in nested methods. Whenever a new method is called, its parameter
+variables and local variables are pushed onto a stack.
+
+The Java library provides a simple Stack class with methods push , pop, and peek.
+
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+Queues:
+
+A queue lets you add items to one end of the queue (the tail) and remove them from the other end
+of the queue (the head). Queues yield items in a "first-in, first-out" or "FIFO" fashion. Items are
+removed the same order in which they were added.
+
+A typical application is a print queue. A printer may be accessed by several applications, perhaps
+running on different computers.
+
+The Queue interface in the standard Java library has methosd add to add an element to the tail of the
+queue, remove to remove the head of the queue, and peek to get the head element of the queue without
+removing it.
+
+The LinkedList class implements the Queue interface. Whenever you need a queue, simply initialize a
+Queue variable with a LinkeList object:
+
+		Queue<String> q = new LinkedList<String>();
+		q.add("A");
+		q.add("B");
+		q.add("C");
+		
+		while(q.size() > 0)
+		{
+			System.out.print(q.remove() + " "); // prints A B C
+		}
+		
+------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------
+Priority Queues:
+
+A priority queue collects elements, each of which has a priority. A typical example of a priority
+queue is a collection of work requests, some of which may be more urgent than others. Unlike a regular
+queue, the priority queue does not maintain a first-in, first-out discipline. Instead, elements are
+retrieved according to their priority. New items can be inserted in any order, but whenever an item
+is removed, it is the item with the most urgent priority.
+
+It is customary to give low values to urgent priorities, with priority 1 denoting the most urgent
+priority. Thus, each removal operation extracts the minimum elements from the queue.
+
+Because the priority queue needs to be able to tell which element is the smallest, the added
+elements should belong to a class that implement the Comparable interface.

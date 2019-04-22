@@ -1,0 +1,74 @@
+A hash function is a function that computes an integer value, the hash code, from an object
+in such a way that different objects are likely to yield different hash codes.
+
+If you want to put objects of a given class into a HashSet or use the objects as keys in a HashMap,
+the class should override this method. The method should be implemented so that different objects
+are likely to have different hash codes.
+
+It is possible for two or more distinct objects to have the same hash code; this is called a collision.
+
+The hashCode method of the String class combines the characters of a string into a numerical code.
+The code isn't simply the sum of the character values - that would not scramble the character values enough.
+
+Here is the method the standard library uses to compute the hash code for a string:
+
+		final int HASH_MULTIPLIER = 31;
+		int h = 0;
+		
+		for(int i = 0; i < s.length; i++)
+		{
+			h = HASH_MULTIPLIER * h + s.charAt(i);
+		}
+		
+
+		The hash code of "eat" is:
+		
+			31 * (31 * 'e' + 'a') + 't' = 100184
+
+For your own classes, you should make up a hash code that combines the hash codes of the instance
+variables in a similar way. For example, let us declare a hashCode method for the Country class.
+There are two instance variables: the country name and the area. First, compute their hash codes.
+You know how to compute the hash code of a string. To compute the hash code of a floating-point
+number, first wrap the floating-point number into a Double object, and then compute its hash code.
+
+		public class Country
+		{
+			public int hashCode()
+			{
+				int h1 = name.hashCode();
+				int h2 = new Double(area).hashCode();
+				...
+			}
+		}
+		
+The combine the two hash codes:
+
+		final int HASH_MULTIPLIER = 29;
+		int h = HASH_MULTIPLIER * h1 + h2;
+		return h;
+		
+Use a prime number as the hash multiplier - it scrambles the values well.
+
+If you have more than two instance variables, then combine their hash codes as follows:
+
+		int h = HASH_MULTIPLIER * h1 + h2;
+		h = HASH_MULTIPLIER * h + h3;
+		h = HASH_MULTIPLIER * h + h4;
+		
+If one of the instance variables is an integer, just use the value as its hash code.
+
+When you supply your own hashCode method for a class, you must also provide a compatible
+equals method. The equals method is used to differentiate between two objects that happen
+to have the same hash code.
+
+The equals and hashCode methods must be compatible with each other. Two objects that are
+equal must yield the same hash code.
+
+You get into trouble if your class declares an equals method but not a hashCode method.
+Suppose the Country class declares an equals method (checking that the name and area
+are the same), but no hashCode method. Then the hashCode method is inherited from the
+Object superclass. That method computes a hash code from the memory location of the
+object. Then it is very likely that two objects with the same contents will have different
+hash codes, in which case a hash set will store them as two distinct objects.
+
+However, if you declare neither equals nor hashCode, then there is no problem.

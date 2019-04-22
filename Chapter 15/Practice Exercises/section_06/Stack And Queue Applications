@@ -1,0 +1,38 @@
+Stack and Queue Applications
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+Balancing Parentheses:
+
+A simple trick for detecting unbalanced parentheses in an expression such as:
+
+		-(b * b - (4 * a * c)) / (2 * a)
+		 1        2         10   1     0
+		 
+Increment a counter when you see a ( and decrement it when you see a ). The counter should never
+be negative, and it should be zero at the end of the expression.
+
+To see whether such an expression is correctly formed, place the parentheses on a stack:
+
+		when you see an opening parenthesis, push it on the stack
+		when you see a closing parenthesis, pop the stack
+		if the opening and closing parentheses don't match
+			the parentheses are unbalanced. Exit
+		if at the end the stack is empty
+			the parentheses are balanced
+		else
+			the parentheses are not balanced
+
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+The algorithm for evaluating reverse polish expressions:
+
+		If you read a number
+			push it on the stack
+		else if you read an operand
+			pop two values off the stack
+			combine the value with the operand
+			push the result back onto the stack
+		else if there is nor more input
+			pop and display the result
+			
+Look at the Calculator.java file

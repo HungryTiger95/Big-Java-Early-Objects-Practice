@@ -1,0 +1,38 @@
+A map allows you to associate elements from a key set with elements from a value collection.
+You use a map when you want to look up objects by using a key. The Java Library has two
+implementations for the Map interface: HashMap and TreeMap.
+
+After constructing a HashMap or TreeMap, you can store the reference to the map object in
+a Map reference:
+
+		Map<String, Color> favoriteColors = new HashMap<String, Color>();
+		
+Use the put method to add an association:
+
+		favoriteColors.put("Juliet", Color.RED);
+		
+You can change the value of an existing association, simply by calling put again:
+
+		favoriteColors.put("Juliet", Color.BLUE);
+		
+The get method returns the value associated with a key:
+
+		Color julietsFavoriteColor = favoriteColors.get("Juliet");
+		
+If you ask for a key that isn't associated with any values, then the get method returns null.
+
+To remove an association, call the remove method with the key:
+
+		favoriteColors.remove("Juliet");
+		
+Sometimes you want to enumerate all keys in a map. The keySet method yields the set of keys.
+You can then ask the key set for an iterator and get all keys. From each key, you can find
+the associated value with the get method. Thus, the following instructions print all key/value
+pairs in a map m:
+
+		Set<String> keySet = m.keySet();
+		for(String set : keySet)
+		{
+			Color value = m.get(key);
+			System.out.println(key + " -> " + value);
+		}
