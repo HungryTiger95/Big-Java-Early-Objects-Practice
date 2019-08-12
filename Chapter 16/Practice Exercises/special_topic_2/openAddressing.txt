@@ -1,0 +1,32 @@
+Special Topic 16.2: Open Addressing
+
+Separate chaining for collision handling is fast and easy to understand, but it requires
+storage for the links to the nodes. If one places the elements directly into the hash
+table, then one doesn't need to store any links. This alternative technique is called
+open addressing. It can be beneficial if one must minimize the memory usage of the hash table.
+
+Of course, open addressing makes collision handling more complicated. If you have two
+elements with (compressed) hash code h, and the first one is placed at index h, then
+the second must be placed in another location.
+
+There are different techniques for placing colliding elements. The simplest is linear
+probing. If possible, place the colliding element at h + 1. If that slot is occupied,
+try h + 2, h + 3, and so on, wrapping around to 0, 1, 2, and so on, if necessary. This
+sequence of index values is called the probing sequence. If the probing sequence contains
+no empty slots, one must reallocate to a larger table.
+
+How do we find an element in such as hash table? We compute the hash code and traverse the
+probing sequence until we either find a match or an empty slot. As long as the hash table is
+not too full, this is still an O(1) operations, but it may require more comparisons than with
+separate chaining. With separate chaining, we only compare objects with the same hash code.
+With open addressing, there may be some objects with different hash codes that happen to lie
+on the probing sequence. Adding an element is similar. Try finding the element first. If it is
+not present, add it in the first empty slot in the probing sequence.
+
+Removing an element is trickier. You cannot simply empty the slot at which you find the element.
+Instead, you must traverse the probing sequence, look for the last element with the same hash
+code, and move that element into the slot of the removed element.
+
+Alternatively, you can replace the removed element with a special "inactive" marker that,
+unlike an empty slot, does not indicate the end of a probing sequence. When adding another
+element, you can overwrite an inactive slot.

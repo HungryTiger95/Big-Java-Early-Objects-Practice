@@ -1,0 +1,346 @@
+16.1: Implementing Linked Lists
+------------------------------------------------------------------------
+
+1: The Node Class
+
+	A linked list stores elements in a sequence of nodes. In a singly-linked list, a Node object
+	stores an element and a reference to the next node.
+	
+	Because the methods of both the linked list class and the iterator class have frequent access
+	to the Node instance variables, we do not make the instance variables of the Node class private.
+	Instead, we make Node a private inner class of the LinkedList class.
+	
+			public class LinkedList
+			{
+				...
+				class Node
+				{
+					public Object data;
+					public Node next;
+				}
+			}
+			
+	Our LinkedList class holds a reference first to the first node (or null, if the list is completely empty):
+	
+			public class LinkedList
+			{
+				private Node first;
+				
+				public LinkedList()
+				{
+					first = null;
+				}
+				
+				public Object getFirst()
+				{
+					if(first == null)
+					{
+						throw new NoSuchElementException();
+					}
+					return first.data;
+				}
+			}
+		
+			
+2: Adding and Removing the First Element
+
+	When a new node is added, it becomes the head of the list, and the node that was the old list
+	head becomes its next node:
+	
+			public class LinkedList
+			{
+				...
+				public void addFirst(Object element)
+				{
+					Node newNode = new Node();
+					newNode.data = element;
+					newNode.next = first;
+					first = newNode;
+				}
+				...
+			}
+
+	Removing the first element works as follows. The data of the first node are saved and later
+	returned as the method result. The successor of the first node becomes the first node of the
+	shorter list. Then there are no further references to the old node, and the garbage collector
+	will eventually recycle it.
+	
+			public LinkedList
+			{
+				...
+				public void removeFirst()
+				{
+					if(first == null)
+					{
+						throw new NoSuchElementException();
+					}
+					Object element = first.data;
+					first = first.next;
+					return element;
+				}
+				...
+			}
+
+
+3: The Iterator Class
+
+	The ListIterator interface in the standard library declares nine methods. We will only focus
+	on the methods next, hasNext, remove, add, and set.
+	
+	Our LinkedList class declares a private inner class LinkedListIterator, which implements our
+	simplified ListIterator interface. Because LinkedListIterator is an inner class, it has access
+	to the private features of the LinkedList class - in particular, the instance variable first and
+	the private Node class.
+	
+	Note that clients of the LinkedList class don't actually know the name of the iterator class.
+	
+	Each iterator object has a reference, position, to the currently visited node. We also store a
+	reference to the last node before that, previous. We will need that reference to adjust the links
+	properly in the remove method. Finally, because calls to remove and set are only valid after a
+	call to next, we use the isAfterNext flag to track when the next method has been called.
+	
+			public class LinkedList
+			{
+				...
+				public ListIterator listIterator()
+				{
+					return new LinkedListIterator();
+				}
+				
+				class LinkedListIterator implements ListIterator
+				{
+					private Node position;
+					private Node previous;
+					private boolean isAfterNext;
+					
+					public LinkedListIterator()
+					{
+						position = null;
+						previous = null;
+						isAfterNext = false;
+					}
+					...
+				}
+			}
+
+4: Advancing an Iterator
+
+	When advancing an iterator with the next method, the position reference is updated to position.next,
+	and the old position is remembered in previous. The previous position is used for just one purpose:
+	to remove the element if the remove method is called after the next method.
+	
+	There is a special case, however - if the iterator points before the first element of the list,
+	then the old position is null, and position must be set to first:
+	
+			class LinkedListIterator implements ListIterator
+			{
+				...
+				public Object next()
+				{
+					if(!hasNext())
+					{
+						throw new NoSuchElementException();
+					}
+					previous = position; // Remember to remove
+					isAfterNext = true;
+					
+					if(position == null)
+					{
+						position = first;
+					}
+					else
+					{
+						position = position.next;
+					}
+					
+					return position.data;
+				}
+				...
+			}
+			
+	The next method is supposed to be called only when the iterator is not yet at the end of the list,
+	so we declare the hasNext method accordingly. The iterator is at the end if the list is empty
+	(that is, first == null) or if there is not element after the current position (position.next == null):
+	
+			class LinkedListIterator implements ListIterator
+			{
+				...
+				public boolean hasNext()
+				{
+					if(position == null)
+					{
+						return first != null;
+					}
+					else
+					{
+						return position.next != null;
+					}
+				}
+				...
+			}
+			
+5: Removing an Element
+
+	Recall that, in order to remove an element, one must first call next and then call remove on
+	the iterator.
+	
+	If the element to be removed is the first element, we just call removeFirst. Otherwise, an element
+	in the middle of the list must be removed, and the node preceding it needs to have its next
+	reference updated to skip the removed element.
+	
+	We also need to update the position reference so that a subsequent call to the next method skips
+	over the element after the removed one.
+	
+	According to the specification of the remove method, it is illegal to call remove twice in a row.
+	Our implementation handles this situation correctly. After completion of the remove method, the
+	isAfterNext flag is set to false. An exception occurs if remove is called again without another
+	call to next.
+	
+			class LinkedListIterator implements ListIterator
+			{
+				...
+				public void remove()
+				{
+					if(!isAfterNext)
+					{
+						throw new IllegalArgumentException();
+					}
+					
+					if(position == first)
+					{
+						removeFirst();
+					}
+					else
+					{
+						previous.next = position.next;
+					}
+					position = previous;
+					
+					isAfterNext = false;
+				}
+				...
+			}
+			
+		There is a good reason for disallowing remove twice in a row. After the first call to remove,
+		the current position reverts to the predecessor of the removed element. Its predecessor is no
+		longer known, which makes it impossible to efficiently remove the current element.
+		
+6: Adding an Element
+
+	The add method of the iterator inserts the new node after the last visited node.
+	
+	After adding the new element, we set the isAfterNext flag to false in order to disallow a
+	subsequent call to the remove or set method.
+	
+			class LinkedListIterator implements ListIterator
+			{
+				...
+				public void add(Object element)
+				{
+					if(position == null)
+					{
+						addFirst(element);
+						position = first;
+					}
+					else
+					{
+						Node newNode = new Node();
+						newNode.data = element;
+						newNode.next = position.next;
+						position.next = newNode;
+						position = newNode;
+					}
+					isAfterNext = false;
+				}
+				...
+			}
+			
+7: Setting an Element to a Different Value
+
+	The set method changes the data stored in the previously visited element.
+	
+			public void set(Object element)
+			{
+				if(!isAfterNext)
+				{
+					throw new IllegalArgumentException();
+				}
+				position.data = element;
+			}
+			
+	As with the remove method, a call to set is only valid if it was preceded by a call to
+	the next method. We throw an exception if we find that there was a call to add or remove
+	immediately before calling set.
+	
+8: Efficiency of Linked List Operations
+
+	Consider first the cost of accessing an element. To get the kth element of a linked list,
+	you start at the beginning of the list and advance the iterator k times. Suppose it takes
+	an amount of time T to advance the iterator once. This quantity is independent of the
+	iterator position - advancing an iterator does some checking and then if follows the next
+	reference of the current node.
+	
+	Therefore, advancing the iterator to the kth element consumes kT time. If the linked list
+	has n elements and k is chosen at random, then k will average out to be n/2, and kT is on
+	average nT/2. Since T/2 is a constant, this is an O(n) expression.
+	
+	Now consider the cost of adding an element at a given position, assuming that we already
+	have an iterator to the position. To add an element, one updates a couple of references in
+	the neighboring nodes and the iterator. This operation requires a constant number of steps,
+	independent of the size of the linked list.
+	
+	Using the big-Oh notation, an operation that requires a bounded amount of time, regardless
+	of the total number of elements int the structures, is denoted as O(1).
+	
+	Similar reasoning shows that removing an element at a given position is an O(1) operation.
+	
+	Now consider the task of adding an element at the end of the list. We first need to get to
+	the end, at a cost of O(n). Then it takes O(1) time to add the element. However, we can
+	improve on this performance if we add a reference to the last node to the LinkedList class:
+	
+			public class LinkedList
+			{
+				private Node first;
+				private Node last;
+				...
+			}
+			
+	Of course, this reference must be updated when the last node changes, as elements are added
+	or removed. In order to keep the code as simple as possible, our implementation does not
+	have a reference to the last node. However, we will always assume that a linked list
+	implementation can access the last element in constant time.
+	
+	The code for the addLast method is very similar to the addFirst method in Section 16.1.2.
+	It also requires constant time, independent of the length of the list. We conclude that,
+	with an appropriate implementation, adding that an element at the end of a linked list is
+	an O(1) operation.
+	
+	How about removing the last element? We need a reference to the next-to-last element, so
+	that we can set its next reference to null.
+	
+	We also need to update the last reference and set it to the next-to-last reference. But
+	how can we get that next-to-last reference? it takes n - 1 iterations to obtain it,
+	starting at the beginning of the list. Thus, removing an element from the back of a
+	singly-linked list is an O(n) operation.
+	
+	We can do better in a doubly-linked list, such as the one in the standard Java library.
+	In a doubly-linked list, each node has a previous node in addition to the next one.
+	
+			public class LinkedList
+			{
+				...
+				class Node
+				{
+					public Object data;
+					public Node next;
+					public Node previous;
+				}
+			}
+			
+	In that case, removal of the last element takes a constant number of steps:
+	
+			last = last.previous;
+			last.next = null;
+	
+	Therefore, removing an element from the end of a doubly-linked list is also an O(1)
+	operations.

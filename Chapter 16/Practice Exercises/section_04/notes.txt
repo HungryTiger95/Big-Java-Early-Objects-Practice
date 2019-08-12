@@ -1,0 +1,106 @@
+16.4: Implementing a Hash Table
+--------------------------------------------------------------------------------------------------------
+
+1: Hash Codes
+
+	The basic idea behind hashing is to place objects into an array, at a location that can be determined from the object itself. Each object has a hash code, an iteger value that is computed from an object in such a way that different objects are likely to yield different hash codes.
+	
+	It is possible for two or more distinct objects to have the same hash code; this is called a collision.
+	
+	
+			+-----------------------------------------------------------------------+
+			|	String			Hash Code			String			Hash Code		|
+			|-----------------------------------------------------------------------|
+			|				|					|				|					|
+			|	"Adam"		|	2035631			|	"Juliet"	|	-2065036585		|
+			|	"Eve"		|	700068			|	"Katherine"	|	2079199209		|
+			|	"Harry"		|	69496448		|	"Sue"		|	83491			|
+			|	"Jim"		|	74478			|	"Ugh"		|	84982			|
+			|	"Joe"		|	74656			|	"VII"		|	84982			|
+			|				|					|				|					|
+			+-----------------------------------------------------------------------+
+	
+			
+2: Hash Tables
+
+	A hash code is used as an array index into a hash table, an array that stores the set elements. In the simplest implementation of a hash table, you could make a very long array and insert each object at the location of its hash code.
+	
+	If there are no collisions, it is a very simple matter to find out whether an object is already present in the set or not. Compute its hash code and check whether the array position with that hash code is already occupied. This doesn't require a search through the entire array!
+	
+	Of course, it is not feasible to allocate an array that is large enough to hold all possible integer index positions. Therefore, we must pick an array of some reasonable size and then "compress" the hash code to become a valid array index. Compression can be easily achieved by using the remainder operation:
+	
+			int h = x.hashcode();
+			if(h < 0)
+			{
+				h = -h;
+			}
+			position = h % arrayLength;
+			
+	After compressing the hash code, it becomes more likely that several objects will collide. There are several techniques for handling collisions. The most common one is called seperate chaining. All colliding elements are collected in a linked list of elements with the same position value. Such a list is called a "bucket".
+	
+	
+3: Finding an Element
+
+	Here is the algorithm for finding a object obj in a hash table:
+	
+		1) Compute the hash code and compress it. This gives an index h into the hash table
+		2) Iterate through the elements of the bucket at position h. For each element of the bucket, check whether it is equal to obj.
+		3) If a match is found among the elements of that bucket, then obj is in the set. Otherwise, it is not.
+		
+	The efficiency is dependent on the hash code computation. In the best case, in which there are no collisions, all buckets either are empty or have a single element.
+	
+	But in practice, some collisions will occur. We need to make some assumptions that are reasonable in practice.
+	
+	First, we assume that the hash code does a good job scattering the elements into different buckets.
+	
+	Next, we assume that the table is large enough. This is measured by the load factor F = n / L, where n is the number of elements and L is the table length.
+	
+	If the load factor gets too large, the elements should be moved into a larger table. The hash table in the standard Java library reallocates the table when the load factor exceeds 0.75.
+	
+	Under these assumptions, each bucket can be expected to have, on average, F elements.
+	
+	Finally, we assume that the hash code, its compression, and the equals method can be computed in bounded time, independent of the size of the set.
+	
+	Now let us compute the cost of finding an element. Computing the array index takes constant time, due to our last assumption. Now we traverse a chain of buckets, which on average has a bounded length F. Finally, we invoke the equals method on each bucket element, which we also assume to be O(1). The entire operation takes constant or O(1) time.
+	
+
+4: Adding and Removing Elements
+
+	Adding an element is an extension of the algorithm for finding an object. First compute the hash code to locate the bucket in which the element should be inserted:
+	
+		1) Compute the compressed hash code h
+		2) Iterate through the elements of the bucket at position h. For each element of the bucket, check whether it is equal to obj (using the equals method of the element type)
+		3) If a match is found among the elements of that bucket, then exit
+		4) Otherwise, add a node containing obj to the beginning of the node sequence
+		5) If the load factor exceeds a fixed threshold, reallocate the table
+		
+	The first steps are O(1). Inserting at the beginning of a node sequence is also O(1). As with array lists, we can choose the new table to be twice the size of the old table, and amortize the cost of reallocation over the preceding insertions. That is, adding an element to a hash table is O(1)+.
+	
+	Removing an element is equally simple. First compute the hash code to locate the bucket in which the element should be inserted. Try finding the object in that bucket. If it is present, remove it. Otherwise, do nothing. Again, this is a constant time operation. If we shrink a table that becomes too sparse, the cost is O(1)+.
+	
+	
+5: Iterating Over a Hash Table
+
+	An iterator for a linked list points to the current node in a list. A hash table has multiple node chains. When we are at the end of one chain, we need to move to the start of the next one. Therefore, the iterator also needs to store the bucket number.
+	
+	When the iterator points into the middle of a node chain, then it is easy to advance it to the next element. However, when the iterator points to the last node in a chain, thenw e must skip past all empty buckets. When we find a non-empty bucket, we advance the iterator to its first node:
+	
+			if(current != null && current.next != null)
+			{
+				current = current.next;
+			}
+			else
+			{
+				do
+				{
+					bucketIndex++;
+					if(bucketIndex == buckets.length)
+					{
+						throw new NoSuchElementException();
+					}
+					current = buckets[bucketIndex];
+				}
+				while(current == null);
+			}
+			
+	As you can see, the cost of iterating over all elements of a hash table is proportional to the table length. Note that the table length could be in excess of O(n) if the table is sparsely filled. This can be avoided if we shrink the table when the load factor gets too small. In that case, iterating over the entire table is O(n), and each iteration step is O(1).

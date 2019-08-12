@@ -1,0 +1,64 @@
+16.3 Implementing Stacks and Queues
+
+	Stacks and queues are examples of abstract data types. We only specify how the operations
+	must behave, not how they are implemented.
+=========================================================================================================================================
+
+1: Stacks as Linked Lists
+
+	Let us first implement a stack as a sequence of nodes. New elements are added to an end of
+	the sequence, and they are removed from the same end.
+	
+	Which end? It is up to us to choose, and we will make the least expensive choice: to add
+	and remove elements at the front.
+	
+	The push and pop operations are identical to the addFirst and removeFirst operations from
+	Section 16.1.2. They are both O(1) operations.
+	
+
+2: Stacks as Arrays
+
+	In this section, we will instead store the values in an array, thus saving the storage
+	of the node references.
+	
+	Again, it is up to us at which end of the array we place new elements. This time, it is
+	better to add and remove elements at the back of the array.
+	
+	Of course, an array may eventually fill up as more elements are pushed on the stack. As
+	with the ArrayList implementation, the array must grow when it gets full.
+	
+	The push and pop operations are identical to the addLast and removeLast operations of an
+	array list. They are both O(1)+ operations.
+	
+
+3: Queues as Linked Lists
+
+	When implementing a queue as a sequence of nodes, we add nodes at one end and remove them
+	at the other. A singly-linked node sequence is not able to remove the last node in O(1)
+	time. Therefore, it is best to remove elements at the front and add them at the back.
+	
+	The add and remove operations of a queue are O(1) operations because they are the same as
+	the addLast and removeFirst operations of a doubly-linked list. Note that we need a
+	reference to the last node so that we can efficiently add elements.
+	
+
+4: Queues as Circular Arrays
+
+	When storing queue elements in an array, we have a problem: elements get added at one end
+	of the array and removed at the other. But adding or removing the first element of an array
+	is an O(n) operation, so it seems that we cannot avoid this expensive operations, no matter
+	which end we choose for adding elements and which for removing them.
+	
+	However, we can solve this problem with a trick. We add elements at the end, but when we
+	remove them, we don't actually move the remaining elements. Instead, we increment the index
+	at which the head of the queue is located.
+	
+	After adding sufficiently many elements, the last element of the array will be filled.
+	However, if there were also a few calls to remove, then there is additional room in the
+	front of the array. then we "wrap around" and start storing elements again at index 0.
+	For that reason, the array is called "circular".
+	
+	As you can see from the source code, adding or removing an element requires a bounded set
+	of operations, independent of the queue size, except for array reallocation. However,
+	reallocation happens rarely enough that the total cost is still amortized constant time, O(1)+.
+	

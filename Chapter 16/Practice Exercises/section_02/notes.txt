@@ -1,0 +1,137 @@
+16.2: Implementing Array Lists
+-----------------------------------------------------------------------------------------------------------
+
+1: Getting and Setting Elements
+
+
+	An array list maintains a reference to an array of elements. The array is large enough to hold all
+elements in the collection - in fact, it is usually larger to allow for adding additional elements. When
+the array gets full, it is replaced by a larger one.
+	
+	In addition to the internal array of elements, an array list has an instance field that stores the
+current number of elements.
+
+		public class ArrayList
+		{
+			private Object[] elements;
+			private int currentSize;
+			
+			public ArrayList()
+			{
+				final int INITIAL_SIZE = 10;
+				elements = new Object[INITIAL_SIZE];
+				currentSize = 0;
+			}
+			
+			public int size()
+			{
+				return currentSize;
+			}
+		}
+		
+	To access array list elements, we provide get and set methods. These methods simply check for valid
+positions and access the internal array at the given position:
+
+		private void checkBounds(int n)
+		{
+			if(n < 0 || n >= currentSize)
+			{
+				throw new IndexOutOfBoundsException();
+			}
+		}
+		
+		public Object get(int pos)
+		{
+			checkBounds(pos);
+			return element[pos];
+		}
+		
+		public void set(int pos, Object element)
+		{
+			checkBounds(pos);
+			elements[pos] = element;
+		}
+		
+	As you can see, getting and setting an element can be carried out with a bounded set of
+	instructions, independent of the size of the array list. These are O(1) operations.
+	
+	
+2: Removing or Adding Elements
+
+	When removing an element at position k, the elements with higher index values need to move. Here
+is the implementation:
+	
+		public Object remove(int pos)
+		{
+			checkBounds(pos);
+			
+			Object removed = elements[pos];
+			
+			for(int i = pos + 1; i < currentSize; i++)
+			{
+				elements[i - 1] = elements[i];
+			}
+			
+			currentSize--;
+			return removed;
+		}
+		
+	How many elements are affected? If we assume that removal happens at random locations, then on
+average, each removal moves n/2 elements, where n is the size of the array list.
+	
+	The same argument holds for inserting an elements. On average, n/2 elements need to be moved.
+Therefore, we say that adding and removing elements are O(n) operations.
+	
+	There is one situation where adding an element to an array list isn't so costly: when the
+insertion happens after the last element. If the current size is less than the length of the array,
+the size is incremented and the new element is simply stored in the array. This is an O(1) operation.
+	
+		public boolean addLast(Object newElement)
+		{
+			growIfNecessary();
+			currentSize++;
+			
+			elements[currentSize - 1] = newElement;
+			return true;
+		}
+		
+	One issue remains: if there is no more room in the internal array, then we need to grow it.
+	
+3: Growing the Internal Array
+
+	Before inserting an element into an internal array that is completely full, we must replace
+the array with a bigger one. This new array is typically twice the size of the current array. The
+existing elements are then copied into the new array. Reallocation is an O(n) operation because all
+elements need to be copied to the new array.
+	
+		public void growIfNecessary()
+		{
+			Object[] newElements = new Object[2 * elements.length];
+			for(int i = 0; i < elements.length; i++)
+			{
+				newElements[i] = elements[i];
+			}
+			elements = newElements;
+		}
+		
+	If we carefully analyze the total cost of a sequence of addLast operations, it turns out that
+these reallocations are not as expensive as they first appear. The key observation is that array
+growth does not happen very often. Suppose we start with an array list of capacity 10 and double
+the size with each reallocation. We must reallocate the array of elements when it reaches sizes
+10, 20, 40, 80, 160, 320, 640, 1280, and so on.
+	
+	Let's assume that one insertion without reallocation takes time T1 and that reallocation of k
+elements takes time T2. What is the cost of 1280 addLast operations?
+	
+	Of course, we pay 1280 * T1 for the insertions. The reallocation cost is a little less than
+	1280 * (T1 + 2T2). In general, the total cost of n addLast operations is less than
+	n * (T1 + T2). Because the second factor is a constant, we conclude that n addLast operations
+	take O(n) time.
+	
+	But if the cost of that reallocation is distributed over the preceding addLast operations,
+then the surcharge for each of them is still a constant amount. We say that addLast takes amortized
+O(1) time, which is written as O(1)+.
+	
+	In our implementation, we do not shrink the array when elements are removed. However, it turns
+out that you can (occasionally) shrink the array and still have O(1)+ performance for removing the
+last element.

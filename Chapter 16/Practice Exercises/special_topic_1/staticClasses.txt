@@ -1,0 +1,26 @@
+Special Topic 16.1: Static Classes
+
+You first saw the use of inner classes for even handlers in Chapter 10. Inner classes
+are useful in that context, because their methods have the privilege of accessing private
+instance variables of outer-class objects. The same is true for the LinkeListIterator
+inner class in the sample code. The iterator needs to access the first instance variable
+of its linked list.
+
+However, there is a cost for this feature. Every object of the inner class has a reference
+to the object of the enclosing class that constructed it. If an inner class has no need
+to access the enclosing class, you can declare the class as static and eliminate the
+reference to the enclosing class. This is the case with the Node class.
+
+	You can declare it as follows:
+	
+		public class LinkedList
+		{
+			...
+			static class Node
+			{
+				...
+			}
+		}
+		
+However, the LinkeListIterator class cannot be a static class. Its methods must access
+the first element of the enclosing LinkedList.
