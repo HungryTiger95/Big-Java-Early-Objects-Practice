@@ -1,6 +1,11 @@
-package section_03;
+package section_03.my_implementation;
 
-public class TreeTester
+import org.junit.Test;
+import org.junit.Assert;
+
+import section_03.BinarySearchTree;
+
+public class BinarySearchTest
 {
 	public static void main(String[] args)
 	{  

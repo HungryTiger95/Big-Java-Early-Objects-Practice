@@ -156,26 +156,30 @@ public class BinarySearchTree
 	/**
 	 * Prints the contents of the tree in sorted order
 	 */
-	public void print()
+	public String print()
 	{
-		print(root);
-		System.out.println();
+		StringBuilder s = new StringBuilder();
+		return s.append(print(root) + "\n").toString();
 	}
 	
 	/**
 	 * Prints a node and all of its descendants in sorted order
 	 * @param parent the root of the subtree to print
 	 */
-	public static void print(Node parent)
+	public static String print(Node parent)
 	{
+		StringBuilder s = new StringBuilder();
+		
 		if(parent == null)
 		{
-			return;
+			return s.toString();
 		}
 		
-		print(parent.left);
-		System.out.print(parent.data + " ");
-		print(parent.right);
+		s.append(print(parent.left));
+		s.append(parent.data + " ");
+		s.append(print(parent.right));
+		
+		return s.toString();
 	}
 	
 	/**
