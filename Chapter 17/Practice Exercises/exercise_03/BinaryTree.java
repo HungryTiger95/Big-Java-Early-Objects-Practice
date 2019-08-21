@@ -1,7 +1,7 @@
-package exercise_02;
+package exercise_03;
 
 /**
- * Add a method countNodesWithOneChild to the binaryTree class.
+ * Add a method swapChildren that swaps all left and right children to the BinaryTree class
  * 
  * @author Mayuresh
  *
@@ -42,6 +42,19 @@ public class BinaryTree
 		root.data = rootData;
 		root.left = left.root;
 		root.right = right.root;
+	}
+	
+	/**
+	 * Constructs a binary tree given just one child
+	 * @param rootData the data for the root
+	 * @param left the left subtree
+	 */
+	public BinaryTree(Object rootData, BinaryTree left)
+	{
+		root = new Node();
+		root.data = rootData;
+		root.left = left.root;
+		root.right = null;
 	}
 	
 	/**
@@ -114,6 +127,41 @@ public class BinaryTree
 		}
 	}
 	
+	/**
+	 * Swaps all the children of the root node
+	 */
+	public void swapChildren()
+	{
+		swapChildren(root);
+	}
+	
+	/**
+	 * Swaps all the children of a given node
+	 * @param n the node to start with
+	 */
+	private static void swapChildren(Node n)
+	{
+		if(n == null)
+		{
+			return;
+		}
+		else
+		{
+			if(n.left == null && n.right == null)
+			{
+				// Do nothing
+			}
+			else
+			{
+				// switch
+				Node tempLeft = n.left;
+				n.left = n.right;
+				n.right = tempLeft;
+			}
+			swapChildren(n.left);
+			swapChildren(n.right);
+		}
+	}
 	/**
 	 * Checks whether this tree is empty
 	 * @return true if this tree is empty

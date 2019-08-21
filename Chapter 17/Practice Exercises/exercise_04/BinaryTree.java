@@ -1,11 +1,5 @@
-package exercise_02;
+package exercise_04;
 
-/**
- * Add a method countNodesWithOneChild to the binaryTree class.
- * 
- * @author Mayuresh
- *
- */
 public class BinaryTree
 {
 	private Node root;
@@ -44,10 +38,6 @@ public class BinaryTree
 		root.right = right.root;
 	}
 	
-	/**
-	 * A node class
-	 *
-	 */
 	class Node
 	{
 		public Object data;
@@ -79,39 +69,6 @@ public class BinaryTree
 	public int height()
 	{
 		return height(root);
-	}
-	
-	/**
-	 * Computes the number of nodes with one child
-	 * @return the number of nodes with one child
-	 */
-	public int countNodesWithOneChild()
-	{
-		return countNodesWithOneChild(root);
-	}
-	
-	/**
-	 * Computes the number of nodes with one child
-	 * @param n the root node
-	 * @return the number of nodes with one child
-	 */
-	private static int countNodesWithOneChild(Node n)
-	{
-		int nodesWithOneChild = 0;
-		
-		if(n == null)
-		{
-			return 0;
-		}
-		else
-		{
-			if((n.left == null && n.right != null) || (n.left != null && n.right  == null))
-			{
-				nodesWithOneChild++;
-			}
-			
-			return nodesWithOneChild + countNodesWithOneChild(n.left) + countNodesWithOneChild(n.right); 
-		}
 	}
 	
 	/**
