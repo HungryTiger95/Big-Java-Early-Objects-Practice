@@ -27,8 +27,8 @@ public class RectangleFrame extends JFrame
 	// Inner Classes
 	class TimerListener implements ActionListener
 	{
-		private int dx = 1;
-		private int dy = 1;
+		private int dx = 2;
+		private int dy = 2;
 		
 		/**
 		 * The actions to be performed when the source is triggered.
@@ -78,7 +78,7 @@ public class RectangleFrame extends JFrame
 		
 		ActionListener listener = new TimerListener();
 		
-		final int DELAY = 1;
+		final int DELAY = 5;
 		t = new Timer(DELAY, listener);
 		t.start();
 	}

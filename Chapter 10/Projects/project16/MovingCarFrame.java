@@ -23,8 +23,8 @@ import javax.swing.Timer;
  */
 public class MovingCarFrame extends JFrame
 {
-	private static final int FRAME_WIDTH = 500;
-	private static final int FRAME_HEIGHT = 400;
+	private static final int FRAME_WIDTH = 800;
+	private static final int FRAME_HEIGHT = 600;
 	
 	private MovingCarComponent scene;
 	
@@ -56,10 +56,8 @@ public class MovingCarFrame extends JFrame
 	{
 		public void mousePressed(MouseEvent event)
 		{
-			if(scene.getAmountOfCars() < 5)
+			if(scene.getAmountOfCars() < 100)
 			{
-				Random gen = new Random();
-				
 				scene.addCar(event.getX(), event.getY(), 2, Color.red);
 			}
 		}

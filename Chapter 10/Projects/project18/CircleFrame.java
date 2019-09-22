@@ -5,8 +5,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 
-import project9.TriangleComponent;
-
 public class CircleFrame extends JFrame
 {
 	// Instance Variables
@@ -36,7 +34,6 @@ public class CircleFrame extends JFrame
 	class MousePressListener extends MouseAdapter
 	{
 		private int mousePressCount = 0;
-		private double centerPoint;
 		
 		public void mousePressed(MouseEvent event)
 		{
