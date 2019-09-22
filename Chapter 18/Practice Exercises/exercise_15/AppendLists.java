@@ -2,6 +2,14 @@ package exercise_15;
 
 import java.util.ArrayList;
 
+/**
+ * Modify the method of Exercise 18.14 so that the second array list can contain elements of a subclass. For example,
+ * if people is an ArrayList<Person> and students is an ArrayList<Student>, then append(people, students) should compile
+ * but append(students, people) should not.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class AppendLists
 {
 	public static void main(String[] args)

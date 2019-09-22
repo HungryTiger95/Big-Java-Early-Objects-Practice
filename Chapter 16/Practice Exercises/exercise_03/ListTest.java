@@ -24,7 +24,7 @@ public class ListTest
 		list.addFirst(new Rectangle(50, 50, 50, 50));
 		list.addFirst(new Rectangle(60, 60, 60, 60));
 		
-		ListIterator iter = list.listIterator();
+		MyListIterator iter = list.listIterator();
 		
 		for(int i = 0; i < 10; i++)
 		{
@@ -54,7 +54,7 @@ public class ListTest
 		list.addFirst(new Rectangle(50, 50, 50, 50));
 		list.addFirst(new Rectangle(60, 60, 60, 60));
 		
-		ListIterator iter = list.listIterator();
+		MyListIterator iter = list.listIterator();
 		
 		for(int i = 0; i < 10; i++)
 		{

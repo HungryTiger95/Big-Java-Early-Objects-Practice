@@ -2,6 +2,12 @@ package exercise_16;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Add a method lastToFirst, as described in Exercise 16.4, to the circular array implementation of a queue.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class CircularQueueArray
 {
 	// Instance Variables

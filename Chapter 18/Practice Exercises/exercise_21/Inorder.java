@@ -6,6 +6,12 @@ import java.util.List;
 
 import exercise_16.Student;
 
+/**
+ * Provide a static method that checks whether the elements of a generic array list are in increasing order. The elements must be comparable.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class Inorder
 {
 	public static void main(String[] args)

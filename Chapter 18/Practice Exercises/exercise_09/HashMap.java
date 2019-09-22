@@ -2,6 +2,15 @@ package exercise_09;
 
 import java.util.ArrayList;
 
+/**
+ * Provide suitable hashCode and equals methods for the Pair class of Section 18.2 and
+ * implement a HashMap class, using a HashSet<Pair<K, V>>.
+ * 
+ * @author Mayuresh
+ *
+ * @param <K>
+ * @param <V>
+ */
 public class HashMap<K, V>
 {
 	// Instance Variables

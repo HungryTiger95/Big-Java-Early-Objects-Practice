@@ -2,6 +2,13 @@ package exercise_16;
 
 import java.util.ArrayList;
 
+/**
+ * Modify the method of Exercise 18.14 so that it leaves the first array list unchanged and
+ * returns a new array list containing the elements of both array lists.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class AppendLists
 {
 	public static void main(String[] args)

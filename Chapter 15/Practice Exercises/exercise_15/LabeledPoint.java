@@ -134,8 +134,8 @@ public class LabeledPoint implements Comparable<LabeledPoint>
 	public int hashCode()
 	{
 		int h1 = this.label.hashCode();
-		int h2 = new Integer(this.x).hashCode();
-		int h3 = new Integer(this.y).hashCode();
+		int h2 = Integer.hashCode(this.x);
+		int h3 = Integer.hashCode(this.y);
 		
 		final int HASH_MULTIPLIER = 29;
 		

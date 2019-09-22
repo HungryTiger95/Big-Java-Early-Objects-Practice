@@ -2,6 +2,12 @@ package exercise_14;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Add a method firstToLast, as described in Exercise 16.12. The method moves the element at the tail of the queue to the head.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class Queue
 {
 	// Instance Variables

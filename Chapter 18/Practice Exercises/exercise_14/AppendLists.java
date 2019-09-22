@@ -2,6 +2,12 @@ package exercise_14;
 
 import java.util.ArrayList;
 
+/**
+ * Provide a static method void append(ArrayList<T> a, ArrayList<T> b) that appends the elements of b to a.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class AppendLists
 {
 	public static void main(String[] args)

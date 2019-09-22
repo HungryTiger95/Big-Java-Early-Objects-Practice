@@ -17,7 +17,7 @@ import java.util.Stack;
  * 
  * 		Lamb little a had mary. Snow as white was fleece its.
  * 
- * Pay attention to capialization and the placement of the period.
+ * Pay attention to capitalization and the placement of the period.
  * 
  * @author Mayuresh
  *

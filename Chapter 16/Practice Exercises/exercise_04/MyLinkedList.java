@@ -2,11 +2,12 @@ package exercise_04;
 
 import java.util.NoSuchElementException;
 
+import exercise_01.MyListIterator;
+
 /**
- * A linked list is a sequence of nodes with efficient
- * element insertion and removal. This class
- * contains a subset of the methods of the standard
- * java.util.LinkedList class.
+ * Add a method size to our implementation of the LinkedList class that computes
+ * the number of elements in the list by following links and counting the elements
+ * until the end of the list is reached.
  * 
  * @author Mayuresh
  *

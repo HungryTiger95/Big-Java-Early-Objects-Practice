@@ -19,56 +19,56 @@ public class MergeSortTest
 		return str + "]";
 	}
 	
-//	@Test
-//	public void testGenericSelectionSort()
-//	{
-//		// Create an array with and print it out
-//		Integer[] a = new Integer[12];
-//		a[0] = 10;
-//		a[1] = 50;
-//		a[2] = 40;
-//		a[3] = 100;
-//		a[4] = 105;
-//		a[5] = 503;
-//		a[6] = 254;
-//		a[7] = 345;
-//		a[8] = 654;
-//		a[9] = 123;
-//		a[10] = 1;
-//		a[11] = 370;
-//		
-//		// Print out the array
-//		System.out.println("Original : " + printArray(a).trim());
-//		
-//		// Time the sort
-//		StopWatch t = new StopWatch();
-//		
-//		t.start();
-//		MergeSorter.sort(a);
-//		t.stop();
-//		
-//		// Create an array that the final array should look like
-//		ArrayList<Integer> expected = new ArrayList<>();
-//		expected.add(1);
-//		expected.add(10);
-//		expected.add(40);
-//		expected.add(50);
-//		expected.add(100);
-//		expected.add(105);
-//		expected.add(123);
-//		expected.add(254);
-//		expected.add(345);
-//		expected.add(370);
-//		expected.add(503);
-//		expected.add(654);
-//		
-//		// assert the two arrays
-//		assertEquals(expected.toString(), printArray(a));
-//		
-//		// Print out the Results
-//		System.out.println("Sorted: " + printArray(a).trim());
-//		System.out.println("Elapsed Time: " + t.getElapsedTime() + " milliseconds");
-//	}
+	@Test
+	public void testGenericSelectionSort()
+	{
+		// Create an array with and print it out
+		Integer[] a = new Integer[12];
+		a[0] = 10;
+		a[1] = 50;
+		a[2] = 40;
+		a[3] = 100;
+		a[4] = 105;
+		a[5] = 503;
+		a[6] = 254;
+		a[7] = 345;
+		a[8] = 654;
+		a[9] = 123;
+		a[10] = 1;
+		a[11] = 370;
+		
+		// Print out the array
+		System.out.println("Original : " + printArray(a).trim());
+		
+		// Time the sort
+		StopWatch t = new StopWatch();
+		
+		t.start();
+		MergeSorter.sort(a);
+		t.stop();
+		
+		// Create an array that the final array should look like
+		ArrayList<Integer> expected = new ArrayList<>();
+		expected.add(1);
+		expected.add(10);
+		expected.add(40);
+		expected.add(50);
+		expected.add(100);
+		expected.add(105);
+		expected.add(123);
+		expected.add(254);
+		expected.add(345);
+		expected.add(370);
+		expected.add(503);
+		expected.add(654);
+		
+		// assert the two arrays
+		assertEquals(expected.toString(), printArray(a));
+		
+		// Print out the Results
+		System.out.println("Sorted: " + printArray(a).trim());
+		System.out.println("Elapsed Time: " + t.getElapsedTime() + " milliseconds");
+	}
 	
 	@Test
 	public void testBankAccountSort()

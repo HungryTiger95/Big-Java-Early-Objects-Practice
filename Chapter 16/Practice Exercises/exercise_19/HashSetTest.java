@@ -3,355 +3,168 @@ package exercise_19;
 import org.junit.Test;
 import org.junit.Assert;
 
+import java.util.Random;
+import java.awt.Rectangle;
+
 public class HashSetTest
 {
 	@Test
-	public void testConstructor()
+	public void testHashSetSize()
 	{
 		HashSet set = new HashSet(10);
 		
-		// Assert that the set has 0 elements and a bucket array length of 10
-		Assert.assertEquals(0, set.getSize());
-		Assert.assertEquals(10, set.getBuckets().length);
-	}
-	
-	@Test
-	public void testAdd1()
-	{
-		HashSet set = new HashSet(10);
-		set.add(6);
-		
-		// Assert that the set has 1 element
-		Assert.assertEquals(1, set.getSize());
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd2()
-	{
-		HashSet set = new HashSet(10);
-		set.add(6);
-		set.add(8);
-		
-		// Assert that the set has 2 elements
-		Assert.assertEquals(2, set.getSize());
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd3()
-	{
-		HashSet set = new HashSet(10);
-		set.add(6);
-		set.add(8);
-		set.add(6);
-		set.add(8);
-		
-		// Assert that the set has 2 elements
-		Assert.assertEquals(2, set.getSize());
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd4()
-	{
-		HashSet set = new HashSet(10);
-		set.add(6);
-		set.add(8);
-		set.add(6);
-		set.add(2);
-		
-		// Assert that the set has 3 elements
-		Assert.assertEquals(3, set.getSize());
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd5()
-	{
-		HashSet set = new HashSet(10);
-		int size = 6;
-		for(int i = 0; i < size; i++)
+		Random gen = new Random();
+		int limit = 10;
+		for(int i = 0; i < limit; i++)
 		{
-			set.add(i);
+			Rectangle box = new Rectangle(gen.nextInt(50) + 1,
+					gen.nextInt(50) + 1,
+					gen.nextInt(50) + 1,
+					gen.nextInt(50) + 1);
+			
+			set.add(box);
 		}
 		
-		// Assert that the set has 6 elements
-		Assert.assertEquals(6, set.getSize());
-		
-		// Print out the set
-		//System.out.println(set.toString());
+		//System.out.println("TEST1:\n" + set.toString());
+		Assert.assertEquals(10, set.getSize());
 	}
 	
 	@Test
-	public void testAdd6()
+	public void testHashSetContains()
 	{
 		HashSet set = new HashSet(10);
-		int size = 7;
-		for(int i = 0; i < size; i++)
-		{
-			set.add(i);
-		}
 		
-		// Assert that the set has 7 elements
-		Assert.assertEquals(7, set.getSize());
+		Rectangle box1 = new Rectangle(10, 10, 10, 10);
+		Rectangle box2 = new Rectangle(20, 10, 10, 10);
+		Rectangle box3 = new Rectangle(30, 10, 10, 10);
+		Rectangle box4 = new Rectangle(40, 10, 10, 10);
+		Rectangle box5 = new Rectangle(50, 10, 10, 10);
+		Rectangle box6 = new Rectangle(60, 10, 10, 10);
+		Rectangle box7 = new Rectangle(70, 10, 10, 10);
+		Rectangle box8 = new Rectangle(80, 10, 10, 10);
+		Rectangle box9 = new Rectangle(90, 10, 10, 10);
+		Rectangle box10 = new Rectangle(100, 10, 10, 10);
 		
-		// Print out the set
-		//System.out.println(set.toString());
+		set.add(box1);
+		set.add(box2);
+		set.add(box3);
+		set.add(box4);
+		set.add(box5);
+		set.add(box6);
+		set.add(box7);
+		set.add(box8);
+		set.add(box9);
+		set.add(box10);
+		
+		//System.out.println("TEST2:\n" + set.toString() + "\n\n");
+		Assert.assertEquals(10, set.getSize());
+		
+		Assert.assertEquals(true, set.contains(new Rectangle(30, 10, 10, 10)));
+		Assert.assertEquals(false, set.contains(new Rectangle(0, 0, 10, 10)));
+		Assert.assertEquals(true, set.contains(new Rectangle(100, 10, 10, 10)));
+		Assert.assertEquals(true, set.contains(new Rectangle(60, 10, 10, 10)));
+		Assert.assertEquals(false, set.contains(new Rectangle(32, 32, 10, 10)));
 	}
 	
 	@Test
-	public void testAdd7()
+	public void testHashSetRemove()
 	{
 		HashSet set = new HashSet(10);
-		int size = 8;
-		for(int i = 0; i < size; i++)
-		{
-			set.add(i);
-		}
 		
-		// Assert that the set has 8 elements
-		Assert.assertEquals(8, set.getSize());
+		Rectangle box1 = new Rectangle(10, 10, 10, 10);
+		Rectangle box2 = new Rectangle(20, 10, 10, 10);
+		Rectangle box3 = new Rectangle(30, 10, 10, 10);
+		Rectangle box4 = new Rectangle(40, 10, 10, 10);
+		Rectangle box5 = new Rectangle(50, 10, 10, 10);
+		Rectangle box6 = new Rectangle(60, 10, 10, 10);
+		Rectangle box7 = new Rectangle(70, 10, 10, 10);
+		Rectangle box8 = new Rectangle(80, 10, 10, 10);
+		Rectangle box9 = new Rectangle(90, 10, 10, 10);
+		Rectangle box10 = new Rectangle(100, 10, 10, 10);
 		
-		// Assert that the size of the buckets array doubled
-		Assert.assertEquals(10, set.getBuckets().length);
+		set.add(box1);
+		set.add(box2);
+		set.add(box3);
+		set.add(box4);
+		set.add(box5);
+		set.add(box6);
+		set.add(box7);
+		set.add(box8);
+		set.add(box9);
+		set.add(box10);
 		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd8()
-	{
-		HashSet set = new HashSet(10);
-		int size = 9;
-		for(int i = 0; i < size; i++)
-		{
-			set.add(i);
-		}
+		//System.out.println("TEST3 Initial:\n" + set.easyToString() + "\n");
+		Assert.assertEquals(10, set.getSize());
 		
-		// Assert that the set has 8 elements
+		// Create an Iterator element
+		SetIterator iter = set.hashSetIterator();
+
+		iter.hasNext();
+		Object obj = (Rectangle) iter.next();
+		
+		iter.hasNext();
+		Object obj2 = (Rectangle) iter.next();
+		
+		iter.hasNext();
+		Object obj3 = (Rectangle) iter.next();
+		//System.out.println(obj.toString() + "\n" + obj2.toString() + "\n" + obj3.toString());
+		
+		Assert.assertEquals(box4, obj);
+		Assert.assertEquals(box5, obj2);
+		Assert.assertEquals(box6, obj3);
+		
+		iter.remove();
+		
 		Assert.assertEquals(9, set.getSize());
-		
-		// Assert that the size of the buckets array doubled
-		Assert.assertEquals(20, set.getBuckets().length);
-		
-		// Print out the set
-		//System.out.println(set.toString());
+		//System.out.println("Test3 Final:\n" + set.toString() + "\n");
 	}
 	
 	@Test
-	public void testAdd9()
+	public void testHashSetRemove2()
 	{
 		HashSet set = new HashSet(10);
-		int size = 29;
-		for(int i = 0; i < size; i++)
+		
+		Rectangle box1 = new Rectangle(10, 10, 10, 10);
+		Rectangle box2 = new Rectangle(20, 10, 10, 10);
+		Rectangle box3 = new Rectangle(30, 10, 10, 10);
+		Rectangle box4 = new Rectangle(40, 10, 10, 10);
+		Rectangle box5 = new Rectangle(50, 10, 10, 10);
+		Rectangle box6 = new Rectangle(60, 10, 10, 10);
+		Rectangle box7 = new Rectangle(70, 10, 10, 10);
+		Rectangle box8 = new Rectangle(80, 10, 10, 10);
+		Rectangle box9 = new Rectangle(90, 10, 10, 10);
+		Rectangle box10 = new Rectangle(100, 10, 10, 10);
+		
+		set.add(box1);
+		set.add(box2);
+		set.add(box3);
+		set.add(box4);
+		set.add(box5);
+		set.add(box6);
+		set.add(box7);
+		set.add(box8);
+		set.add(box9);
+		set.add(box10);
+		
+		//System.out.println("TEST4 Initial:\n" + set.easyToString() + "\n");
+		Assert.assertEquals(10, set.getSize());
+		
+		// Create an Iterator element
+		SetIterator iter = set.hashSetIterator();
+
+		while(iter.hasNext())
 		{
-			set.add(i);
+			Object obj = (Rectangle) iter.next();
+			//System.out.println(obj);
+			
+			//System.out.println("Pos: " + iter.getPosition());
+			//System.out.println("Prev: " + iter.getPrevious() + "\n");
+			iter.remove();
+			//System.out.println("Pos: " + iter.getPosition());
+			//System.out.println("Prev: " + iter.getPrevious() + "\n");
 		}
 		
-		// Assert that the set has 8 elements
-		Assert.assertEquals(29, set.getSize());
-		
-		// Assert that the size of the buckets array doubled
-		Assert.assertEquals(40, set.getBuckets().length);
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd10()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Shivani");
-		
-		// Assert that the set has 8 elements
-		Assert.assertEquals(8, set.getSize());
-		
-		// Assert that the size of the buckets array doubled
-		Assert.assertEquals(10, set.getBuckets().length);
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testAdd11()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Simran");
-		set.add("Shivani");
-		set.add("Divya");
-		set.add("Rupal");
-		
-		// Assert that the set has 8 elements
-		Assert.assertEquals(11, set.getSize());
-		
-		// Assert that the size of the buckets array doubled
-		Assert.assertEquals(20, set.getBuckets().length);
-		
-		// Print out the set
-		//System.out.println(set.toString());
-	}
-	
-	@Test
-	public void testContains1()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Simran");
-		set.add("Shivani");
-		set.add("Divya");
-		set.add("Rupal");
-		
-		Assert.assertEquals(true, set.contains("Maanvi"));
-		Assert.assertEquals(false, set.contains("Harsh"));
-		Assert.assertEquals(true, set.contains("Anjali"));
-		Assert.assertEquals(false, set.contains("Anju"));
-		Assert.assertEquals(false, set.contains("anjali"));
-	}
-	
-	@Test
-	public void testContains2()
-	{
-		HashSet set = new HashSet(10);
-		set.add(1);
-		set.add(23);
-		set.add(16);
-		set.add(10);
-		set.add(34);
-		set.add(54);
-		set.add(30);
-		set.add(76);
-		set.add(80);
-		set.add(165);
-		set.add(189);
-		
-		Assert.assertEquals(true, set.contains(16));
-		Assert.assertEquals(false, set.contains(11));
-		Assert.assertEquals(true, set.contains(76));
-		Assert.assertEquals(false, set.contains(81));
-		Assert.assertEquals(false, set.contains(109));
-	}
-	
-	@Test
-	public void testRemove1()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Simran");
-		set.add("Shivani");
-		set.add("Divya");
-		set.add("Rupal");
-		//System.out.println("Original:\n" + set.toString());
-		
-		Assert.assertEquals(11, set.getSize());
-		Assert.assertEquals(false, set.remove("Alisha"));
-		Assert.assertEquals(11, set.getSize());
-		//System.out.println("\nRemoved:\n" + set.toString());
-	}
-	
-	@Test
-	public void testRemove2()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Simran");
-		set.add("Shivani");
-		set.add("Divya");
-		set.add("Rupal");
-		//System.out.println("Original:\n" + set.toString());
-		
-		Assert.assertEquals(11, set.getSize());
-		Assert.assertEquals(true, set.remove("Pooja"));
-		Assert.assertEquals(10, set.getSize());
-		//System.out.println("\nRemoved:\n" + set.toString());
-	}
-	
-	@Test
-	public void testRemove3()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Simran");
-		set.add("Shivani");
-		set.add("Divya");
-		set.add("Rupal");
-		//System.out.println("Original:\n" + set.toString());
-		
-		Assert.assertEquals(11, set.getSize());
-		Assert.assertEquals(true, set.remove("Mahek"));
-		Assert.assertEquals(10, set.getSize());
-		//System.out.println("\nRemoved:\n" + set.toString());
-	}
-	
-	@Test
-	public void testRemove4()
-	{
-		HashSet set = new HashSet(10);
-		set.add("Aarohi");
-		set.add("Mansi");
-		set.add("Payal");
-		set.add("Anjali");
-		set.add("Maanvi");
-		set.add("Mahek");
-		set.add("Pooja");
-		set.add("Simran");
-		set.add("Shivani");
-		set.add("Divya");
-		set.add("Rupal");
-		//System.out.println("Original:\n" + set.toString());
-		
-		Assert.assertEquals(11, set.getSize());
-		Assert.assertEquals(true, set.remove("Aarohi"));
-		Assert.assertEquals(10, set.getSize());
-		//System.out.println("\nRemoved:\n" + set.toString());
+		Assert.assertEquals(0, set.getSize());
+		//System.out.println("Test4 Final:\n" + set.easyToString() + "\n");
 	}
 }

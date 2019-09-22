@@ -3,7 +3,8 @@ package exercise_10;
 import java.util.NoSuchElementException;
 
 /**
- * This is a simplified implementation of an array list.
+ * Provide a removeLast method for the ArrayList implementation in section 16.2 that shrinks the internal
+ * array by 50 percent when it is less than 25 percent full.
  * 
  * @author Mayuresh
  *
@@ -174,19 +175,6 @@ public class ArrayList
 		}
 	}
 	
-	private void shrinkIfNecessary()
-	{
-		if((double) this.currentSize / (double) getInternalArraySize() < 0.25)
-		{
-			Object[] newElements = new Object[this.elements.length / 2];
-			for(int i = 0; i < this.currentSize; i++)
-			{
-				newElements[i] = this.elements[i];
-			}
-			
-			this.elements = newElements;
-		}
-	}
 	/**
 	 * Removes the last element in the list; will also shrink the internal array
 	 * if the filled to internal array length ratio drops below %25
@@ -208,8 +196,18 @@ public class ArrayList
 		// Update the current size variable
 		this.currentSize--;
 		
+		
 		// Shrink the array if the current size is less than 25% full
-		shrinkIfNecessary();
+		if((double) this.currentSize / (double) getInternalArraySize() < 0.25)
+		{
+			Object[] newElements = new Object[this.elements.length / 2];
+			for(int i = 0; i < this.currentSize; i++)
+			{
+				newElements[i] = this.elements[i];
+			}
+			
+			this.elements = newElements;
+		}
 		return last;
 	}
 	

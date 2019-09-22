@@ -138,11 +138,11 @@ public class HashSetIteratorTest
 		{
 			iter.next();
 		}
-		iter.remove();			// iter is pointing to 100, previous is null. after removal, iter should point to 20 and previous should be null
+		iter.remove();			// iter is pointing to 100, previous is null. after removal, iter should point to null and previous should be null
 		
 		
 		Assert.assertEquals(9, set.getSize());
-		Assert.assertEquals("20", iter.getPosition());
+		Assert.assertEquals("null", iter.getPosition());
 		Assert.assertEquals("null", iter.getPrevious());
 		
 		//System.out.println("Position: " + iter.getPosition());
@@ -172,11 +172,11 @@ public class HashSetIteratorTest
 		{
 			iter.next();
 		}
-		iter.remove();			// iter is pointing to 20, previous is 100. after removal, iter should point to 40 and previous should be 100
+		iter.remove();			// iter is pointing to 20, previous is 100. after removal, iter should point to 100 and previous should be null
 		
 		Assert.assertEquals(9, set.getSize());
-		Assert.assertEquals("40", iter.getPosition());
-		Assert.assertEquals("100", iter.getPrevious());
+		Assert.assertEquals("100", iter.getPosition());
+		Assert.assertEquals("null", iter.getPrevious());
 		
 		//System.out.println("Position: " + iter.getPosition());
 		//System.out.println("Previous: " + iter.getPrevious());

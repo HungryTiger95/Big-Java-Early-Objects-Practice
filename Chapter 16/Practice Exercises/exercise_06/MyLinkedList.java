@@ -2,11 +2,14 @@ package exercise_06;
 
 import java.util.NoSuchElementException;
 
+import exercise_01.MyListIterator;
+
 /**
- * A linked list is a sequence of nodes with efficient
- * element insertion and removal. This class
- * contains a subset of the methods of the standard
- * java.util.LinkedList class.
+ * Add an instance varible currentSize to our implementation of the LinkedList class.
+ * Modify the add, addLast, and remove methods of both the linked list and the list
+ * iterator to update the currentSize variable so that it contains the correct size.
+ * Change the size method of Exercise 4 so that it simply returns the value of this
+ * instance variable.
  * 
  * @author Mayuresh
  *

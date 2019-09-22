@@ -11,10 +11,6 @@ public class LinkedListIterator implements ListIterator
 	private boolean isAfterNext;
 	
 	// Constructors
-	/**
-	 * Constructs a linked list iterator object with a given list
-	 * @param list the list to iterate over
-	 */
 	public LinkedListIterator(LinkedList list)
 	{
 		this.list = list;
@@ -24,12 +20,6 @@ public class LinkedListIterator implements ListIterator
 	}
 	
 	// Methods
-	/**
-	 * Returns the next object in the linked list.
-	 * Throws a NoSuchElementException if there aren't any more
-	 * elements in the list
-	 * @return the next object in the list
-	 */
 	public Object next()
 	{
 		if(!hasNext())
@@ -52,10 +42,6 @@ public class LinkedListIterator implements ListIterator
 		return this.position.getData();
 	}
 	
-	/**
-	 * Checks to see if there is another element in the list
-	 * @return true if there is another element
-	 */
 	public boolean hasNext()
 	{
 		if(this.position == null)
@@ -68,10 +54,6 @@ public class LinkedListIterator implements ListIterator
 		}
 	}
 	
-	/**
-	 * Adds an element to the linked list
-	 * @param element the element to add
-	 */
 	public void add(Object element)
 	{
 		if(this.position == null)
@@ -93,9 +75,6 @@ public class LinkedListIterator implements ListIterator
 		this.list.incrementListSize(1);
 	}
 	
-	/**
-	 * Removes the last element that was traversed over
-	 */
 	public void remove()
 	{
 		if(!this.isAfterNext)
@@ -117,10 +96,6 @@ public class LinkedListIterator implements ListIterator
 		this.list.incrementListSize(-1);
 	}
 	
-	/**
-	 * Sets another value for the element that was last traversed over
-	 * @param element the new element to replace the old one with
-	 */
 	public void set(Object element)
 	{
 		if(!this.isAfterNext)

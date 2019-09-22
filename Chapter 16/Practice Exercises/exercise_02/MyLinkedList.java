@@ -1,8 +1,6 @@
 package exercise_02;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
-
 
 /**
  * Consider a version of the LinkedList class of Section 16.1 in which the addFirst method
@@ -26,7 +24,6 @@ public class MyLinkedList
 {
 	// Instance Variables
 	private Node first;
-	private int currentSize;
 	
 	// Constructors
 	/**
@@ -35,19 +32,9 @@ public class MyLinkedList
 	public MyLinkedList()
 	{
 		this.first = null;
-		this.currentSize = 0;
 	}
 	
 	// Methods
-	/**
-	 * Returns the size of the linked list
-	 * @return the size
-	 */
-	public int size()
-	{
-		return this.currentSize;
-	}
-	
 	/**
 	 * Returns the first element in the linked list
 	 * @return the first element in the linked list
@@ -75,7 +62,6 @@ public class MyLinkedList
 		
 		Object element = this.first.data;
 		this.first = first.next;
-		this.currentSize--;
 		return element;
 	}
 	
@@ -87,11 +73,9 @@ public class MyLinkedList
 	{
 		Node newNode = new Node();
 		
-		this.first = newNode;
+		first = newNode;
 		newNode.data = element;
 		newNode.next = first;
-		
-		this.currentSize++;
 	}
 	/**
 	 * Adds an element to the front of the linked list
@@ -104,8 +88,6 @@ public class MyLinkedList
 		newNode.data = element;
 		newNode.next = first;
 		this.first = newNode;
-		
-		this.currentSize++;
 	}
 	
 	/**
@@ -115,96 +97,6 @@ public class MyLinkedList
 	public MyListIterator listIterator()
 	{
 		return new MyLinkedListIterator();
-	}
-	
-	/**
-	 * Reverses the Linked List
-	 * 
-	 * This method basically creates a new linked list by cutting the head and then inserting it
-	 * into the new list until the first list is empty. And then simply assigning the head of the
-	 * new linked list as the head of the old one.
-	 */
-	public void reverse()
-	{
-		// Make sure that there is an element present
-		if(this.first == null)
-		{
-			throw new NoSuchElementException();
-		}
-
-		MyLinkedList temp = new MyLinkedList();
-
-		while(this.first != null)
-		{
-			// Remove the first link and return the object
-			Object element = this.removeFirst();
-
-			// Add the first link to the temporary linked list
-			temp.addFirst(element);
-		}
-
-		// Set the temporary linked list to this linked list
-		this.first = temp.first;
-	}
-
-	/**
-	 * Reverses the linked list by reversing the links.
-	 */
-	public void betterReverse()
-	{
-		if(this.first == null)
-		{
-			throw new NoSuchElementException();
-		}
-
-		Node previous = this.first;
-		Node current = first.next;
-		first.next = null;
-
-		while(current != null)
-		{
-			Node next = current.next;
-			current.next = previous;
-			previous = current;
-			current = next;
-		}
-
-		this.first = previous;
-	}
-	
-	/**
-	 * Returns a ArrayList representation of this linked list
-	 * @return arraylist containing all the objects in this linked list
-	 */
-	public ArrayList<Object> toArray()
-	{
-		ArrayList<Object> objs = new ArrayList<>();
-		// Iterate over each node and add the element into the array
-		MyListIterator iter = this.listIterator();
-		while(iter.hasNext())
-		{
-			objs.add(iter.next());
-		}
-		
-		return objs;
-	}
-	
-	/**
-	 * Returns the string representation of this linked list
-	 */
-	public String toString()
-	{
-		String s = "";
-		
-		MyListIterator iter = this.listIterator();
-		
-		while(iter.hasNext())
-		{
-			Object obj = iter.next();
-			s = s + "[" + obj + "]";
-		}
-		
-		return s;
 	}
 	
 	// Inner Classes
@@ -294,7 +186,7 @@ public class MyLinkedList
 			if(this.position == null)
 			{
 				addFirst(element);
-				this.position = first;
+				position = first;
 			}
 			else
 			{
@@ -306,7 +198,6 @@ public class MyLinkedList
 				this.position = newNode;
 			}
 			
-			currentSize++;
 			this.isAfterNext = false;
 		}
 		
@@ -331,7 +222,6 @@ public class MyLinkedList
 			
 			this.position = this.previous;
 			this.isAfterNext = false;
-			currentSize--;
 		}
 		
 		/**

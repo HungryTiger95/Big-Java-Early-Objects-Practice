@@ -11,7 +11,6 @@ public class GradeBookTester
 		final int REMOVE = 3;
 		final int MODIFY = 4;
 		final int PRINT = 5;
-		final int QUIT = 6;
 		
 		int state = START;
 		
@@ -73,32 +72,12 @@ public class GradeBookTester
 			}
 			else if(state == PRINT)
 			{
-				// Print gradebook
 				book.printGradeBook();
-				
-				// Return to START state
-				state = START;
-				
-				// Get out of the loop
-				//done = true;
-			}
-			else if(state == QUIT)
-			{
-				// Print gradebook
-				book.printGradeBook();
-				
-				// Get out of the loop
 				done = true;
-				
-				// Show that the app is terminating
-				System.out.println("Exiting App...");
 			}
 			else
 			{
-				// Get out of the loop
 				done = true;
-				
-				// Print out the problem
 				System.out.println("State Exception: Terminating Program");
 			}
 		}

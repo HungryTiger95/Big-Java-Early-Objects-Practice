@@ -15,7 +15,6 @@ public class LinkedList
 {
 	// Instance Variables
 	private Node first;
-	private int currentSize;
 	
 	// Constructors
 	/**
@@ -24,19 +23,9 @@ public class LinkedList
 	public LinkedList()
 	{
 		this.first = null;
-		this.currentSize = 0;
 	}
 	
 	// Methods
-	/**
-	 * Returns the size of the linked list
-	 * @return the size
-	 */
-	public int size()
-	{
-		return this.currentSize;
-	}
-	
 	/**
 	 * Returns the first element in the linked list
 	 * @return the first element in the linked list
@@ -64,7 +53,6 @@ public class LinkedList
 		
 		Object element = this.first.data;
 		this.first = first.next;
-		this.currentSize--;
 		return element;
 	}
 	
@@ -79,17 +67,15 @@ public class LinkedList
 		newNode.data = element;
 		newNode.next = first;
 		this.first = newNode;
-		
-		this.currentSize++;
 	}
 	
 	/**
 	 * Returns an iterator for iterating through this list
 	 * @return an iterator for iterating through this list
 	 */
-	public ListIterator listIterator()
+	public MyListIterator listIterator()
 	{
-		return new LinkedListIterator();
+		return new MyLinkedListIterator();
 	}
 	
 	/**
@@ -148,45 +134,27 @@ public class LinkedList
 	}
 	
 	/**
-	 * Returns a ArrayList representation of this linked list
-	 * @return arraylist containing all the objects in this linked list
-	 */
-	public ArrayList<Object> toArray()
-	{
-		ArrayList<Object> objs = new ArrayList<>();
-		// Iterate over each node and add the element into the array
-		ListIterator iter = this.listIterator();
-		while(iter.hasNext())
-		{
-			objs.add(iter.next());
-		}
-		
-		return objs;
-	}
-	
-	/**
 	 * Returns the string representation of this linked list
 	 */
 	public String toString()
 	{
 		String s = "";
 		
-		ListIterator iter = this.listIterator();
+		MyListIterator iter = this.listIterator();
 		
+		s += "[";
 		while(iter.hasNext())
 		{
 			Object obj = iter.next();
-			s = s + "[" + obj + "]";
+			s += obj.toString() + ", ";
 		}
 		
-		return s;
+		return s.substring(0, s.length() - 2) + "]";
 	}
 	
 	// Inner Classes
 	/**
-	 * The Node class is what makes up each link in the linked list.
-	 * This class contains the data that is to be stored in the links
-	 * of the linked list.
+	 * The Node class is what makes up each link in the linked list. This class contains the data that is to be stored in the links of the linked list.
 	 * @author Mayuresh
 	 *
 	 */
@@ -195,14 +163,15 @@ public class LinkedList
 		// Instance Variables
 		public Object data;
 		public Node next;
+		ArrayList<String> list = new ArrayList<String>();
 	}
 	
 	/**
-	 * Iterator class that is used to iterate over the linked list
+	 * Iterator class that is used to traverse the linked list
 	 * @author Mayuresh
 	 *
 	 */
-	class LinkedListIterator implements ListIterator
+	class MyLinkedListIterator implements MyListIterator
 	{
 		// Instance Variables
 		private Node position;
@@ -213,7 +182,7 @@ public class LinkedList
 		/**
 		 * Constructs an iterator that points to the front
 		 */
-		public LinkedListIterator()
+		public MyLinkedListIterator()
 		{
 			this.position = null;
 			this.previous = null;
@@ -227,7 +196,6 @@ public class LinkedList
 		 */
 		public Object next()
 		{
-			// If there isn't another element in the list, throw an exception
 			if(!hasNext())
 			{
 				throw new NoSuchElementException();
@@ -248,7 +216,7 @@ public class LinkedList
 		}
 		
 		/**
-		 * Tests if there is an element after the iterator position
+		 * Tests if there is an element after the iterator position.
 		 * @return true if there is an element after the iterator position
 		 */
 		public boolean hasNext()
@@ -264,8 +232,7 @@ public class LinkedList
 		}
 		
 		/**
-		 * Adds an element before the iterator position and move the
-		 * iterator past the inserted element
+		 * Adds an element before the iterator position and moves the iterator past the inserted element
 		 * @param element the element to add
 		 */
 		public void add(Object element)
@@ -285,19 +252,17 @@ public class LinkedList
 				this.position = newNode;
 			}
 			
-			currentSize++;
 			this.isAfterNext = false;
 		}
 		
 		/**
-		 * Removes the last traversed element. This method may only be called
-		 * after a call to the next method 
+		 * Removes the last traversed element. This method may only be called after a call to the next method
 		 */
 		public void remove()
 		{
 			if(!this.isAfterNext)
 			{
-				throw new IllegalStateException();
+				throw new NoSuchElementException();
 			}
 			
 			if(this.position == first)
@@ -311,11 +276,10 @@ public class LinkedList
 			
 			this.position = this.previous;
 			this.isAfterNext = false;
-			currentSize--;
 		}
 		
 		/**
-		 * Sets the last traversed element to a different value
+		 * Sets the last traversed element to a different value.
 		 * @param element the element to set
 		 */
 		public void set(Object element)
@@ -324,6 +288,7 @@ public class LinkedList
 			{
 				throw new NoSuchElementException();
 			}
+			
 			this.position.data = element;
 		}
 	}

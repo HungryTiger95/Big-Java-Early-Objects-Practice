@@ -1,12 +1,18 @@
 package exercise_03;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
- * Add a method reverse to our implementation of the LinkedList class that reverses
- * the links in a list. Implement this method by directly re-routing the links, not 
- * by using an iterator.
+ * Consider a version of the LinkedList class of section 16.1 in which the iterator's hasNext method has been
+ * replaced with the following faulty version:
+ * 
+ * 		public boolean hasNext()
+ * 		{
+ * 			return position != null;
+ * 		}
+ * 
+ * Develop a program ListTest with a test case that shows the error. That is, the program should print a failure
+ * message with this implementation but not with the correct implementation.
  * 
  * @author Mayuresh
  *
@@ -15,7 +21,6 @@ public class LinkedList
 {
 	// Instance Variables
 	private Node first;
-	private int currentSize;
 	
 	// Constructors
 	/**
@@ -24,19 +29,9 @@ public class LinkedList
 	public LinkedList()
 	{
 		this.first = null;
-		this.currentSize++;
 	}
 	
 	// Methods
-	/**
-	 * Returns the size of the linked list
-	 * @return the size
-	 */
-	public int size()
-	{
-		return this.currentSize;
-	}
-	
 	/**
 	 * Returns the first element in the linked list
 	 * @return the first element in the linked list
@@ -64,7 +59,6 @@ public class LinkedList
 		
 		Object element = this.first.data;
 		this.first = first.next;
-		this.currentSize--;
 		return element;
 	}
 	
@@ -79,89 +73,15 @@ public class LinkedList
 		newNode.data = element;
 		newNode.next = first;
 		this.first = newNode;
-		
-		this.currentSize++;
 	}
 	
 	/**
 	 * Returns an iterator for iterating through this list
 	 * @return an iterator for iterating through this list
 	 */
-	public ListIterator listIterator()
+	public MyListIterator listIterator()
 	{
-		return new LinkedListIterator();
-	}
-	
-	/**
-	 * Reverses the Linked List
-	 * 
-	 * This method basically creates a new linked list by cutting the head and then inserting it
-	 * into the new list until the first list is empty. And then simply assigning the head of the
-	 * new linked list as the head of the old one.
-	 */
-	public void reverse()
-	{
-		// Make sure that there is an element present
-		if(this.first == null)
-		{
-			throw new NoSuchElementException();
-		}
-
-		LinkedList temp = new LinkedList();
-
-		while(this.first != null)
-		{
-			// Remove the first link and return the object
-			Object element = this.removeFirst();
-
-			// Add the first link to the temporary linked list
-			temp.addFirst(element);
-		}
-
-		// Set the temporary linked list to this linked list
-		this.first = temp.first;
-	}
-
-	/**
-	 * Reverses the linked list by reversing the links.
-	 */
-	public void betterReverse()
-	{
-		if(this.first == null)
-		{
-			throw new NoSuchElementException();
-		}
-
-		Node previous = this.first;
-		Node current = first.next;
-		first.next = null;
-
-		while(current != null)
-		{
-			Node next = current.next;
-			current.next = previous;
-			previous = current;
-			current = next;
-		}
-
-		this.first = previous;
-	}
-	
-	/**
-	 * Returns a ArrayList representation of this linked list
-	 * @return arraylist containing all the objects in this linked list
-	 */
-	public ArrayList<Object> toArray()
-	{
-		ArrayList<Object> objs = new ArrayList<>();
-		// Iterate over each node and add the element into the array
-		ListIterator iter = this.listIterator();
-		while(iter.hasNext())
-		{
-			objs.add(iter.next());
-		}
-		
-		return objs;
+		return new MyLinkedListIterator();
 	}
 	
 	/**
@@ -171,7 +91,7 @@ public class LinkedList
 	{
 		String s = "";
 		
-		ListIterator iter = this.listIterator();
+		MyListIterator iter = this.listIterator();
 		
 		while(iter.hasNext())
 		{
@@ -200,7 +120,7 @@ public class LinkedList
 	 * @author Mayuresh
 	 *
 	 */
-	class LinkedListIterator implements ListIterator
+	class MyLinkedListIterator implements MyListIterator
 	{
 		// Instance Variables
 		private Node position;
@@ -211,7 +131,7 @@ public class LinkedList
 		/**
 		 * Constructs an iterator that points to the front
 		 */
-		public LinkedListIterator()
+		public MyLinkedListIterator()
 		{
 			this.position = null;
 			this.previous = null;
@@ -244,10 +164,6 @@ public class LinkedList
 			return this.position.data;
 		}
 		
-		/**
-		 * Gets the last element that was traversed over
-		 * @return the element last traversed
-		 */
 		public Object getLastTraverse()
 		{
 			return this.position;
@@ -269,10 +185,6 @@ public class LinkedList
 			}
 		}
 		
-		/**
-		 * A faulty has next method: DO NOT USE
-		 * @return true if there is element after the iterator position
-		 */
 		public boolean faultyHasNext()
 		{
 			return this.position != null;
@@ -299,7 +211,6 @@ public class LinkedList
 				this.position = newNode;
 			}
 			
-			currentSize++;
 			this.isAfterNext = false;
 		}
 		
@@ -324,7 +235,6 @@ public class LinkedList
 			
 			this.position = this.previous;
 			this.isAfterNext = false;
-			currentSize--;
 		}
 		
 		/**

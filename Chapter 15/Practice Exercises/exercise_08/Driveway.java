@@ -3,8 +3,6 @@ package exercise_08;
 import java.util.Stack;
 
 /**
- * 
- * @author Mayuresh
  * A homeowner rents out parking spaces in a driveway during special events. The driveway
  * is a "last-in, first-out" stack. Of course, when a car owner retrieves a vehicle that wasn't
  * the last one in, the cars blocking it must temporarily move to the street so that the
@@ -12,6 +10,8 @@ import java.util.Stack;
  * the driveway and one stack for the street. Use integers as license plate numbers. Positive
  * numbers add a car, negative numbers remove a car, zero stops the simulation. Print out the
  * stack after each operation is complete.
+ * 
+ * @author Mayuresh
  * 
  */
 public class Driveway

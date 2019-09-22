@@ -3,6 +3,12 @@ package exercise_13;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Time the results of heapsort and merge sort. Which algorithm behaves better in practice?
+ * 
+ * @author Mayuresh
+ *
+ */
 public class TimerDemo
 {
 	public static void main(String[] args)

@@ -1,7 +1,8 @@
 package exercise_13;
 
 /**
- * An interface that defines a method to measure an object
+ * Make the Measurer interface from Chapter 10 into a generic class. Provide a static method T max(T[] value, Measurer<T> meas).
+ * 
  * @author Mayuresh
  *
  * @param <E> the type of element

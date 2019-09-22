@@ -20,106 +20,12 @@ public class MyStackTest
 	}
 	
 	@Test
-	public void testPus1()
+	public void testPush()
 	{
 		MyStack stack = new MyStack();
 		stack.push(10);
 		
-		Assert.assertEquals(10, stack.getInternalArray().length);
 		Assert.assertEquals(1, stack.getCurrentSize());
-	}
-	
-	@Test
-	public void testPush2()
-	{
-		MyStack stack = new MyStack();
-		stack.push(10);
-		stack.push(20);
-		
-		Assert.assertEquals(10, stack.getInternalArray().length);
-		Assert.assertEquals(2, stack.getCurrentSize());
-	}
-	
-	@Test
-	public void testPush3()
-	{
-		MyStack stack = new MyStack();
-		stack.push(10);
-		stack.push(20);
-		stack.push(30);
-		stack.push(40);
-		Assert.assertEquals(10, stack.getInternalArray().length);
-		Assert.assertEquals(4, stack.getCurrentSize());
-	}
-	
-	@Test
-	public void testPush4()
-	{
-		MyStack stack = new MyStack();
-		stack.push(10);
-		stack.push(20);
-		stack.push(30);
-		stack.push(40);
-		stack.push(50);
-		stack.push(60);
-		stack.push(70);
-		stack.push(80);
-		Assert.assertEquals(10, stack.getInternalArray().length);
-		Assert.assertEquals(8, stack.getCurrentSize());
-	}
-	
-	@Test
-	public void testPush5()
-	{
-		MyStack stack = new MyStack();
-		stack.push(10);
-		stack.push(20);
-		stack.push(30);
-		stack.push(40);
-		stack.push(50);
-		stack.push(60);
-		stack.push(70);
-		stack.push(80);
-		stack.push(90);
-		Assert.assertEquals(10, stack.getInternalArray().length);
-		Assert.assertEquals(9, stack.getCurrentSize());
-	}
-	
-	@Test
-	public void testPush6()
-	{
-		MyStack stack = new MyStack();
-		stack.push(10);
-		stack.push(20);
-		stack.push(30);
-		stack.push(40);
-		stack.push(50);
-		stack.push(60);
-		stack.push(70);
-		stack.push(80);
-		stack.push(90);
-		stack.push(100);
-		Assert.assertEquals(20, stack.getInternalArray().length);
-		Assert.assertEquals(10, stack.getCurrentSize());
-	}
-	
-	@Test
-	public void testPush7()
-	{
-		MyStack stack = new MyStack();
-		stack.push(10);
-		stack.push(20);
-		stack.push(30);
-		stack.push(40);
-		stack.push(50);
-		stack.push(60);
-		stack.push(70);
-		stack.push(80);
-		stack.push(90);
-		stack.push(100);
-		stack.push(110);
-		Assert.assertEquals(20, stack.getInternalArray().length);
-		Assert.assertEquals(11, stack.getCurrentSize());
 	}
 	
 	@Test
@@ -154,7 +60,7 @@ public class MyStackTest
 		Assert.assertEquals(true, stack.isEmpty());
 	}
 	
-	@Test(expected = NoSuchElementException.class)
+	@Test
 	public void testPopV2()
 	{
 		MyStack stack = new MyStack();
@@ -173,7 +79,14 @@ public class MyStackTest
 		Assert.assertEquals(true, stack.isEmpty());
 		
 		// Try to pop an element off
-		stack.pop();
+		try
+		{
+			stack.pop();
+		}
+		catch(NoSuchElementException e)
+		{
+			System.out.println("ERROR: Stack Empty Cannot Pop");
+		}
 	}
 	
 	@Test
@@ -181,17 +94,17 @@ public class MyStackTest
 	{
 		MyStack stack = new MyStack();
 		
-		for(int i = 1; i <= 9; i++)
+		for(int i = 1; i <= 10; i++)
 		{
 			int val = i * 10;
 			stack.push(val);
 		}
-		Assert.assertEquals(9, stack.getCurrentSize());
+		Assert.assertEquals(10, stack.getCurrentSize());
 		Assert.assertEquals(10, stack.getInternalArray().length);
 		
 		stack.push(110);
 		
-		Assert.assertEquals(10, stack.getCurrentSize());
+		Assert.assertEquals(11, stack.getCurrentSize());
 		Assert.assertEquals(20, stack.getInternalArray().length);
 	}
 	

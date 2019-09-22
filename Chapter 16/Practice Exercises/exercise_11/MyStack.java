@@ -2,12 +2,17 @@ package exercise_11;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Complete the implementation of a stack in section 16.3.2, using an array for storing the elements.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class MyStack
 {
 	// Instance Variables
 	private Object[] elements;
 	private int currentSize;
-	private final int INITIAL_SIZE = 10;
 	
 	// Constructors
 	/**
@@ -15,6 +20,7 @@ public class MyStack
 	 */
 	public MyStack()
 	{
+		final int INITIAL_SIZE = 10;
 		this.elements = new Object[INITIAL_SIZE];
 		this.currentSize = 0;
 	}
@@ -46,14 +52,14 @@ public class MyStack
 	 */
 	public void push(Object element)
 	{
-		this.currentSize++;
 		growIfNecessary();
+		this.currentSize++;
 		
 		this.elements[this.currentSize - 1] = element;
 	}
 	
 	/**
-	 * Pops off an element from the top of the stack
+	 * Pops off an element from the top of the list
 	 * @return the element that was popped off
 	 */
 	public Object pop()
@@ -63,11 +69,13 @@ public class MyStack
 			throw new NoSuchElementException();
 		}
 		
+		shrinkIfNecessary();
+		
 		Object obj = this.elements[this.currentSize - 1];
 		this.elements[this.currentSize - 1] = null;
-		
 		this.currentSize--;
-		shrinkIfNecessary();
+		
+		
 		return obj;
 	}
 	

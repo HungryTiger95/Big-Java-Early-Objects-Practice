@@ -16,8 +16,8 @@ import org.junit.Assert;
  * @author Mayuresh
  *
  */
-public class ListTest
-{
+public class ListTest {
+
 	@Test
 	public void testaddFirst()
 	{

@@ -3,33 +3,7 @@ package exercise_06;
 import java.lang.reflect.Array;
 
 /**
- * The merge sort is a much more efficient algorithm than the selection sort. The basic idea behind merge
- * sort is very simple.
- * 
- * Suppose we have an array of 10 integers. Let us engage in a bit of wishful thinking and hope that the
- * first half of the array is already perfectly sorted, and the second half is too, like this:
- * 
- * 		5 9 10 12 17 and 1 8 11 20 32
- * 
- * Now it is simple to merge the two sorted arrays into one sorted array, by taking a new element form
- * either the first or the second subarray, and choosing the smaller of the elements each time:
- * 
- * 		5 9 10 12 17  8 11 20 32		1	
- * 		  9 10 12 17  8 11 20 32		1 5
- * 			10 12 17    11 20 32		1 5 8
- * 			   12 17    11 20 32        1 5 8 9
- * 				  17    11 20 32        1 5 8 9 10
- * 			               20 32        1 5 8 9 10 11
- * 			               20 32        1 5 8 9 10 11 12
- * 			               20 32        1 5 8 9 10 11 12 17
- * 							  32		1 5 8 9 10 11 12 17 20
- * 										1 5 8 9 10 11 12 17 20 32
- * 
- * If the computer keeps dividing the array into smaller and smaller subarrays, sorting each half and
- * merging them back together, it carries out dramatically fewer steps than the selection sort requires.
- * 
- * When the MergeSorter sorts an array, it makes two arrays, each half the size of the original, and sorts
- * them recursively. Then it merges the two sorted arrays together:
+ * Implement a generic version of the merge sort algorithm. Your program should compile without warnings.
  * 
  * @author Mayuresh
  *

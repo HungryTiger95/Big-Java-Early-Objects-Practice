@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This class implements a hash set using separate chaining
+ * Reallocate the buckets of the hash set implementation in section 16.4 when the load factor is greater than 1.0
+ * or less than 0.5, double or halving its size. Note that you need to recompute the hash values of all elements.
  * 
  * @author Mayuresh
  *

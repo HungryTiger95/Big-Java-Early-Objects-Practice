@@ -3,6 +3,12 @@ package exercise_17;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Modify the method of Exercise 18.16 so that it receives and returns arrays, not array lists. Hint: Arrays.copyOf.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class AppendLists
 {
 	public static void main(String[] args)

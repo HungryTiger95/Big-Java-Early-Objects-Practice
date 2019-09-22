@@ -1,9 +1,12 @@
 package exercise_17;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
- * This class implements a hash set using separate chaining
+ * The hasNext method of the hash set implementation in section 16.4 finds the location of the next element, but when next
+ * is called, the same search happens again. Improve the efficiency of these methods so that the next  (or a repeated call
+ * to hasNext) uses the position located by a preceding call to hasNext.
  * 
  * @author Mayuresh
  *

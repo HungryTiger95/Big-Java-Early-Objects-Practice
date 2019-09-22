@@ -1,33 +1,49 @@
 package exercise_09;
 
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class ArrayListIterator implements ListIterator
 {
 	// Instance Variables
 	private ArrayList list;
 	private int currentIndex;
+	private boolean isAfterNext;
 	
 	// Constructors
 	/**
-	 * Constructs an array list iterator object with a given list
-	 * @param list the list to iterate over
+	 * Constructs an iterator meant to iterate over an array list
+	 * @param list the array list to iterate over
 	 */
 	public ArrayListIterator(ArrayList list)
 	{
 		this.list = list;
 		this.currentIndex = -1;
+		this.isAfterNext = false;
 	}
-
+	
 	// Methods
+	
+	public int currentIndex()
+	{
+		return this.currentIndex;
+	}
+	
 	@Override
 	public boolean hasNext()
 	{
-		if(this.list.get(this.currentIndex + 1) == null)
+		if(this.currentIndex == this.list.size() - 1)
 		{
 			return false;
 		}
-		return true;
+		else if (this.list.get(this.currentIndex + 1) != null)
+		{
+			return true;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	@Override
@@ -35,9 +51,13 @@ public class ArrayListIterator implements ListIterator
 	{
 		if(!hasNext())
 		{
-			throw new IndexOutOfBoundsException("No More Elements");
+			throw new NoSuchElementException();
 		}
+		
+		// Increment the currentIndex
 		this.currentIndex++;
+		
+		// Get the element to return it
 		return this.list.get(this.currentIndex);
 	}
 
@@ -46,9 +66,16 @@ public class ArrayListIterator implements ListIterator
 	{
 		if(this.currentIndex == -1 || this.currentIndex == 0)
 		{
+			throw new NoSuchElementException();
+		}
+		else if(this.list.get(this.currentIndex - 1) != null)
+		{
+			return true;
+		}
+		else
+		{
 			return false;
 		}
-		return true;
 	}
 
 	@Override
@@ -56,8 +83,9 @@ public class ArrayListIterator implements ListIterator
 	{
 		if(!hasPrevious())
 		{
-			throw new IndexOutOfBoundsException("Cannot Go Back");
+			throw new NoSuchElementException();
 		}
+		
 		this.currentIndex--;
 		return this.list.get(this.currentIndex);
 	}
@@ -67,9 +95,11 @@ public class ArrayListIterator implements ListIterator
 	{
 		if(!hasNext())
 		{
-			throw new IndexOutOfBoundsException();
+			throw new NoSuchElementException();
 		}
-		return this.currentIndex + 1;
+		
+		int i = this.currentIndex + 1;
+		return i;
 	}
 
 	@Override
@@ -77,40 +107,28 @@ public class ArrayListIterator implements ListIterator
 	{
 		if(!hasPrevious())
 		{
-			throw new IndexOutOfBoundsException();
+			throw new NoSuchElementException();
 		}
-		return this.currentIndex - 1;
+		int i = this.currentIndex - 1;
+		return i;
 	}
 
 	@Override
 	public void remove()
 	{
-		if(this.currentIndex == -1)
-		{
-			throw new IndexOutOfBoundsException();
-		}
 		this.list.remove(this.currentIndex);
-		this.currentIndex--;
 	}
 
 	@Override
 	public void set(Object e)
 	{
-		if(this.currentIndex == -1)
-		{
-			throw new IndexOutOfBoundsException();
-		}
 		this.list.set(this.currentIndex, e);
 	}
 
 	@Override
 	public void add(Object e)
 	{
-		if(this.currentIndex == -1)
-		{
-			throw new IndexOutOfBoundsException();
-		}
 		this.list.add(this.currentIndex, e);
-		this.currentIndex++;
 	}
+	
 }

@@ -2,6 +2,13 @@ package exercise_12;
 
 import java.util.ArrayList;
 
+/**
+ * Modify the implementation of the MinHeap class so that the parent and child index positions and
+ * elements are computed directly, without calling helper methods.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class MinHeap
 {
 	// Instance Variables

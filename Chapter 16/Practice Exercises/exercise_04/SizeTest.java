@@ -6,14 +6,6 @@ import java.util.Random;
 import org.junit.Test;
 import org.junit.Assert;
 
-/**
- * Add a method size to our implementation of the LinkedList class that computes
- * the number of elements in the list by following links and counting the elements
- * until the end of the list is reached.
- * 
- * @author Mayuresh
- *
- */
 public class SizeTest
 {
 	@Test

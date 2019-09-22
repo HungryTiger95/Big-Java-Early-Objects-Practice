@@ -1,0 +1,51 @@
+Sometimes you want to sort an array or array list of objects, but the objects don't
+belong to a class that implements the Comparable interface. Or, perhaps, you want
+to sort the array in a different order. For example, you may want to sort countries
+by name rather than by value.
+
+You wouldn't want to change the implementation of a class simply to call Arrays.sort.
+One version of the Arrays.sort method does not require that the objects belong to
+classes that implement the Comparable interface. Instead, you can supply arbitrary
+objects. However, you must also provide a comparator object whose job is to compare
+objects. The comparator object must belong to a class that implements the Comparator
+interface. That interface has a single method, compare, which compares two objects.
+
+The comparator interface is a parameterized type. The type parameter specifies the
+type of the compare parameter variables. For example, Comparator<Country> looks like
+this:
+
+		public interface Comparator<Country>
+		{
+			int compare(Country a, Country b);
+		}
+		
+The call
+
+		comp.compare(a, b);
+		
+must return a negative number if a should come before b, 0 if a and b are the same,
+and a positive number otherwise. (Here, comp is an object of a class that implements
+Comparator<Country>.)
+
+		public class CountryComparator implements Comparator<Country>
+		{
+			public int compare(Country a, Country b)
+			{
+				if(a.area < b.area)
+				{
+					return -1;
+				}
+				else if(a.area == b.area)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
+			}
+		}
+		
+To sort an array of countries by area, call
+
+		Arrays.sort(Countries, new CountryComparator());

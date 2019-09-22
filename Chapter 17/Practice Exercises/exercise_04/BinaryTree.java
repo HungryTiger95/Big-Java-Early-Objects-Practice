@@ -1,5 +1,22 @@
 package exercise_04;
 
+/**
+ * Implement the animal guessing game described in section 17.2.1. Start with the tree in Figure 4, but present the
+ * leaves as "Is it a(n) X?" If it wasn't, ask the user what the animal was, and ask for a question that is true for
+ * that animal but false for X. For example,
+ * 
+ * 			Is it a mammal? y
+ * 			Does it have stripes? n
+ * 			Is it a pig? n
+ * 			I give up. What is it? A hamster
+ * 			Please give me a question that is true for a hamster and false for a pig.
+ * 			Is it small and cuddly?
+ * 
+ * In this way, the program learns addition facts.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class BinaryTree
 {
 	private Node root;

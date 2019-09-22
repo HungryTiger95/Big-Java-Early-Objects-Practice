@@ -2,6 +2,12 @@ package exercise_07;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Reimplement the LinkedList class of section 16.1 so that the Node and LinkedList Iterator classes are not inner classes
+ * 
+ * @author Mayuresh
+ *
+ */
 public class LinkedList
 {
 	// Instance Variables
@@ -9,9 +15,6 @@ public class LinkedList
 	private int currentSize;
 	
 	// Constructors
-	/**
-	 * Constructs a singly-linked list
-	 */
 	public LinkedList()
 	{
 		this.first = null;
@@ -19,10 +22,6 @@ public class LinkedList
 	}
 	
 	// Methods
-	/**
-	 * Returns the data from the first node in the list
-	 * @return the data in the first node
-	 */
 	public Object getFirst()
 	{
 		if(this.first == null)
@@ -33,19 +32,11 @@ public class LinkedList
 		return this.first.getData();
 	}
 	
-	/**
-	 * Returns the first node
-	 * @return the first node
-	 */
 	public Node getFirstNode()
 	{
 		return this.first;
 	}
 	
-	/**
-	 * Removes the first node
-	 * @return the node that was removed
-	 */
 	public Object removeFirst()
 	{
 		if(this.first == null)
@@ -61,10 +52,6 @@ public class LinkedList
 		return element;
 	}
 	
-	/**
-	 * Adds an element to the beginning of the linked list
-	 * @param element the element to be added
-	 */
 	public void addFirst(Object element)
 	{
 		Node newNode = new Node();
@@ -76,19 +63,11 @@ public class LinkedList
 		this.currentSize++;
 	}
 	
-	/**
-	 * Returns the current size of the list
-	 * @return the size
-	 */
 	public int getSize()
 	{
 		return this.currentSize;
 	}
 	
-	/**
-	 * Increments the size of the list
-	 * @param n increment by the given amount
-	 */
 	public void incrementListSize(int n)
 	{
 		if(n < 0)
@@ -105,18 +84,11 @@ public class LinkedList
 		}
 	}
 	
-	/**
-	 * Returns the list iterator for this list
-	 * @return the list iterator
-	 */
 	public ListIterator getListIterator()
 	{
 		return new LinkedListIterator(this);
 	}
 	
-	/**
-	 * Returns the string representation of this list
-	 */
 	public String toString()
 	{
 		String s = "";

@@ -2,6 +2,15 @@ package exercise_12;
 
 import java.util.ArrayList;
 
+/**
+ * Turn the MinHeap class of Chapter 17 into a generic class. As with the TreeSet class of the standard library,
+ * allow a Comparator to compare elements. If no comparator is supplied, assume that the element type implements
+ * the Comparable interface.
+ * 
+ * @author Mayuresh
+ *
+ * @param <E>
+ */
 public class MinHeap<E extends Comparable<E>>
 {
 	// Instance Variables

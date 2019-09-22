@@ -4,29 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Sometimes it is easier to find a recursive solution if you make a slight change to
- * the original problem. Then the original problem can be solved by calling a recursive
- * helper method.
- * 
- * Here is a typical example: In the palindrome test of How To 13.1, it is a bit
- * inefficient to construct new string objects in every step. Instead of testing
- * whether the entire sentence is a palindrome, let's check whether a substring
- * is a palindrome.
- * 
- * In the recursive calls, simply adjust the start and end parameter variables
- * to skip over matching letter pairs and characters that are not letters.
- * 
- * You should stil supply a method to solve the whole problem - the user of your
- * method shouldn't have to know about the trick with the substring positions.
- * 
- * Note that this call is not a recursive method call. The isPalindrome(String)
- * method calls the helper method isPalindrome(String, int, int). In this example,
- * we use over-loading to declare two methods with the same name. If you prefer, you
- * can avoid overloaded method by choosing different name for the helper method, such
- * as substringIsPalindrome.
- * 
- * Use the technique of recursive helper methods whenever it is easier to solve a
- * recursive problem that is equivalent to the original problem.
+ * Provide a static method that checks whether a generic array list is a palindrome; that is, whether the values
+ * at index i and n - 1 - i are equal to each other, where n is the size of the array list.
  * 
  * @author Mayuresh
  *

@@ -2,6 +2,12 @@ package exercise_12;
 
 import java.util.NoSuchElementException;
 
+/**
+ * Complete the implementation of a queue in section 16.3.3, using a sequence of nodes for storing the elements.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class Queue
 {
 	// Instance Variables

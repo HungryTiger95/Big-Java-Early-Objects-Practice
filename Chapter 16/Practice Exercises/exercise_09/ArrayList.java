@@ -1,14 +1,16 @@
 package exercise_09;
 
-import java.util.Iterator;
+import java.util.ListIterator;
 
 /**
- * This is a simplified implementation of an array list.
+ * Provide a listIterator method for the ArrayList implement in section 16.2. Your method should return an object of a
+ * class implementing java.util.ListIterator. Also have he ArrayList class implement the Iterable interface type and
+ * provide a test program that demonstrates that your array list can be used in an enhanced for loop.
  * 
  * @author Mayuresh
  *
  */
-public class ArrayList implements Iterable
+public class ArrayList
 {
 	// Instance Variables
 	private Object[] elements;
@@ -167,14 +169,8 @@ public class ArrayList implements Iterable
 		return this.getClass().getName() + ": " + s;
 	}
 
-	public ArrayListIterator listIterator()
+	public ListIterator listIterator()
 	{
 		return new ArrayListIterator(this);
-	}
-
-	@Override
-	public Iterator iterator()
-	{
-		return listIterator();
 	}
 }

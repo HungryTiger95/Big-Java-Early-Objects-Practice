@@ -22,14 +22,9 @@ public class SieveOfEratosthenes
 	// Methods
 	public static void main(String[] args)
 	{
-		System.out.println(findPrimes(1000));
+		System.out.println(findPrimes(8));
 	}
 	
-	/**
-	 * Finds all prime numbers up to nth value
-	 * @param n the largest number to test for being prime
-	 * @return all the prime numbers up to n
-	 */
 	public static Set<Integer> findPrimes(int n)
 	{
 		Set<Integer> primes = new HashSet<Integer>();

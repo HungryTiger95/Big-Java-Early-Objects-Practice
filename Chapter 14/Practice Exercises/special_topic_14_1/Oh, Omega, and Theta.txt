@@ -1,0 +1,37 @@
+The formal definition of the big-Oh notation is:
+
+		Suppose we have a function T(n). Usually, it represents the processing time of
+		an algorithm for a given input of size n. But it could be any function. Also,
+		suppose that we have another function f(n). It is usually chosen to be a simple
+		function, such as f(n) = n ^ k or f(n) = log(n), but it too can be any function.
+		We write:
+		
+				T(n) = O(f(n))
+				
+		if T(n) grows at a rate that is bounded by f(n).
+
+More formally, we require that for all n larger than some threshold, the ratio
+T(n) / f(n) <= C for some constant value C.
+
+If T(n) is a polynomial of degree k in n, then one can show that T(n) = O(n^k).
+Some algorithms take much more time. For example, one way of sorting a sequence
+is to compute all of its permutations, until you find one that is in increasing
+order. Such an algorithm takes O(n!) time, which is very bad indeed.
+
+Strictly speaking, T(n) = O(f(n)) means that T grows no faster than f. But it is
+permissible for T to grow much more slowly. Thus, it is technically correct to state
+that T(n) = n^2 + 5n - 3 is O(n^3) or even O(n^10);
+
+There are more accurate ways to describe the growth behavior of functions. The expression:
+
+		T(n) = omega(f(n))
+	
+means that T grows at least as fast as f, or, formally, that for all n larger than some
+threshold, the ratio T(n) / f(n) >= C for some constant value C. For example,
+T(n) = n^2 + 5n - 3 is omega(n^2) or even omega(n).
+
+The theta notation gives the most precise description of growth behavior. For example,
+T(n) = n^2 + 5n - 3 is theta(n^2) but not theta(n) or theta(n^3).
+
+These notations are good and well, but it casual conversation, big-Oh notation gives a
+good estimate.

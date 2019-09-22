@@ -1,5 +1,13 @@
 package exercise_11;
 
+/**
+ * Write a generic static method print that prints the elements of any object that implements the
+ * Iterable<E> interface. The elements should be separated by commas. Place your method into an
+ * appropriate utility class.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class IterablePrinter
 {
 	/**

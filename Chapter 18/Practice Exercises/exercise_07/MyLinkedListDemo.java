@@ -5,6 +5,12 @@ import org.junit.Test;
 
 import java.awt.Rectangle;
 
+/**
+ * Implement a generic version of the LinkedList class of Chapter 16.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class MyLinkedListDemo
 {
 	@Test

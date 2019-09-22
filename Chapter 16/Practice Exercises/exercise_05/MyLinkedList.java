@@ -2,11 +2,15 @@ package exercise_05;
 
 import java.util.NoSuchElementException;
 
+import exercise_01.MyListIterator;
+
 /**
- * A linked list is a sequence of nodes with efficient
- * element insertion and removal. This class
- * contains a subset of the methods of the standard
- * java.util.LinkedList class.
+ * Solve Exercise 4 recursively by calling a recursive helper method
+ * 
+ * 		private static int size(Node start)
+ * 
+ * Hint: if start is null, then the size is 0. Otherwise, it is one larger than
+ * the size of start.next.
  * 
  * @author Mayuresh
  *
@@ -121,7 +125,6 @@ public class MyLinkedList
 			return size(start.next) + 1;
 		}
 	}
-	
 	// Inner Classes
 	/**
 	 * This class contains the data that is in 

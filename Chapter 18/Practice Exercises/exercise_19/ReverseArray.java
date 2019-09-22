@@ -2,6 +2,12 @@ package exercise_19;
 
 import java.util.ArrayList;
 
+/**
+ * Provide a static method that returns the reverse of a generic array list, without modifying the original list.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class ReverseArray
 {
 	public static void main(String[] args)

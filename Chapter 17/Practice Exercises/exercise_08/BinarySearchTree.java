@@ -1,5 +1,11 @@
 package exercise_08;
 
+/**
+ * Using a visitor, compute the average value of the elements in a binary tree filled with Integer objects.
+ * 
+ * @author Mayuresh
+ *
+ */
 public class BinarySearchTree
 {
 	private Node root;

@@ -4,6 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Write a program that keeps a map in which both keys and values are strings - the names of students
+ * and their course grades. Prompt the user of the program to add or remove students, to modify grades,
+ * or  to print all grades. The printout should be sorted by name and formatted like this:
+ * 
+ * 			Carl : B+
+ * 			Joe: C
+ * 			Sarah: A+
+ * 
+ * @author Mayuresh
+ *
+ */
 public class GradeBook
 {
 	// Instance Variables
@@ -46,14 +58,11 @@ public class GradeBook
 	public void printGradeBook()
 	{
 		Set<String> keySet = this.grades.keySet();
-		
-		System.out.printf("%14s\n", "GRADES");
 		for(String key : keySet)
 		{
 			String grade = this.grades.get(key);
 			System.out.printf("%10s: %4s\n", key, grade);
 		}
-		System.out.println();
 	}
 	
 	/**
