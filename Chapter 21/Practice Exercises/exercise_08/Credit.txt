@@ -1,0 +1,1 @@
+I want to give credit for this exercise to "ifqthenp" on githut. I was confused on a certain aspect on this excercise and used his code as inspiration to set up a "Main" class and to set up parts of the code.
